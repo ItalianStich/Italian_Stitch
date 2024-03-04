@@ -218,7 +218,7 @@ function Header(props) {
     return (
         <nav className="custom-navbar navbar navbar navbar-expand-md navbar-dark bg-dark" arial-label="Furni navigation bar">
             <div className="container">
-                <a className="navbar-brand" href="index.html">Italian Stitch<span></span></a>
+                <NavLink className="navbar-brand" to={"/"}>Italian Stitch<span></span></NavLink>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFurni" aria-controls="navbarsFurni" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon" />
                 </button>

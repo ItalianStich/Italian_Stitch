@@ -83,7 +83,7 @@ function Cart(props) {
                             <div className="col-md-8 mb-3 mb-md-0">
                                 <input type="text" className="form-control py-3" id="coupon" placeholder="Coupon Code" />
                             </div>
-                            <div className="col-md-4">
+                            <div className="col-md-6" style={{paddingTop: '10px'}}>
                                 <button className="btn2 btn2-primary"> Apply Coupon </button>
                             </div>
                         </div>

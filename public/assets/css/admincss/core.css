@@ -12872,7 +12872,7 @@ button.list-group-item-gray.active {
 
 .bg-dark {
   --bs-bg-opacity: 1;
-  background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
+  /* background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important; */
 }
 
 .bg-gray {
@@ -20714,7 +20714,7 @@ html:not(.layout-footer-fixed) .content-wrapper {
 }
 
 .navbar.bg-dark {
-  background-color: #233446 !important;
+  /* background-color: #233446 !important; */
   color: #e4e6e8;
 }
 
