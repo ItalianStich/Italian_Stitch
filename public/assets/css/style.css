@@ -203,6 +203,12 @@ a.more {
     }
 }
 
+@media (min-width: 1000px) {
+    .custom-navbar.bg-dark {
+        background-color: #3b5d50 !important;
+    }
+}
+
 @media (min-width: 992px) {
     .hero .hero-img-wrap img {
         left: 0px;

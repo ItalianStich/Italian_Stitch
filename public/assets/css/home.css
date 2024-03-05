@@ -408,9 +408,9 @@ nav.close~.dashboard .top {
 }
 
 @media (max-width: 1000px) {
-    nav {
+    /* nav {
         width: 73px;
-    }
+    } */
 
     nav.close {
         width: 250px;
