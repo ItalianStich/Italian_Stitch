@@ -1,27 +1,52 @@
 import React from 'react';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 function Home(props) {
+    const settings = {
+        dots: false,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 3000
+    };
+
     return (
         <div>
-            <div className="hero">
-
-                <div className="container">
-                    <div className="row justify-content-between">
-                        <div className="col-lg-5">
-                            <div className="intro-excerpt">
-                                <h1>Modern Interior <span clsas="d-block">Design Studio</span></h1>
-                                <p className="mb-4">Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique.</p>
-                                <p><a href className="btn1 btn-secondary me-2">Shop Now</a><a href="#" className="btn1 btn-white-outline">Explore</a></p>
-                            </div>
-                        </div>
-                        <div className="col-lg-7">
-                            <div className="hero-img-wrap">
-                                {/* <img src="../assets/images/couch.png" className="img-fluid" /> */}
-                            </div>
+            <section>
+                <Slider {...settings}>
+                    <div>
+                        <div className="bg-image one">
+                            {/* <div className="slide-content slide-animation">
+                                <h1>Casual Clothing</h1>
+                                <h2>lifestyle / clothing / hype</h2>
+                            </div> */}
                         </div>
                     </div>
-                </div>
-            </div>
+                    <div>
+                        <div className="bg-image two">
+                            {/* <div className="slide-content-2 slide-animation">
+                                <h2 className="slide-2-h2-a">Hiking</h2>
+                                <h2 className="slide-2-h2-b">Collection</h2>
+                                <h1>2023</h1>
+                            </div> */}
+                        </div>
+                    </div>
+                    <div>
+                        <div className="bg-image three">
+                            {/* <div className="slide-content slide-animation">
+                                <h1>Tech
+                                    <span style={{ color: '#333' }}>Deals</span>
+                                </h1>
+                                <h2 style={{ color: '#333' }}># shopping</h2>
+                            </div> */}
+                        </div>
+                    </div>
+                </Slider>
+            </section>
             {/* End Hero Section */}
             {/* Start Product Section */}
             <div className="product-section">
@@ -174,7 +199,7 @@ function Home(props) {
                 </div>
             </div>
             {/* End Popular Product */}
-            
+
             {/* Start Blog Section */}
             <div className="blog-section">
                 <div className="container">
