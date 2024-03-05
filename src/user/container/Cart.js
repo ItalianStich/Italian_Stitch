@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 function Cart(props) {
     return (
@@ -83,7 +84,7 @@ function Cart(props) {
                             <div className="col-md-8 mb-3 mb-md-0">
                                 <input type="text" className="form-control py-3" id="coupon" placeholder="Coupon Code" />
                             </div>
-                            <div className="col-md-6" style={{paddingTop: '10px'}}>
+                            <div className="col-md-6" style={{ paddingTop: '10px' }}>
                                 <button className="btn2 btn2-primary"> Apply Coupon </button>
                             </div>
                         </div>
@@ -115,7 +116,7 @@ function Cart(props) {
                                 <div className="row">
                                     <div className="col-md-12">
                                         {/* <button className="btn1 btn-black btn-lg py-3 btn-block" onclick="window.location='checkout.html'">Proceed To Checkout</button> */}
-                                        <button className="btn2 btn2-primary"> Proceed  to Checkout</button>
+                                        <NavLink to={"/checkout"}><button className="btn2 btn2-primary"> Proceed  to Checkout</button></NavLink>
                                     </div>
                                 </div>
                             </div>

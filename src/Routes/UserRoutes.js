@@ -8,6 +8,8 @@ import Shop from '../user/container/Shop/Shop';
 import About from '../user/container/About';
 import Contact from '../user/container/Contact';
 import Cart from '../user/container/Cart';
+import Checkout from '../user/container/Checkout';
+import Thankyou from '../user/container/Thankyou';
 // import PrivateRoutes from './PrivateRoutes';
 
 function UserRoutes(props) {
@@ -15,14 +17,17 @@ function UserRoutes(props) {
         <>
             <Header />
             <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/shop" element={<Shop />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/contact" element={<Contact />} />
+                <Route exact path="/" element={<Home />} />
+                <Route exact path="/shop" element={<Shop />} />
+                <Route exact path="/about" element={<About />} />
+                <Route exact path="/contact" element={<Contact />} />
 
                 {/* <Route element={<PrivateRoutes />}> */}
-                    <Route path="/cart" element={<Cart />} />
+                <Route exact path="/cart" element={<Cart />} />
                 {/* </Route> */}
+
+                <Route exact path='/checkout' element={<Checkout />} />
+                <Route exact path='/thankyou' element={<Thankyou />} />
 
                 {/* <Route path="/shop" element={<Shop />} />
                 <Route path="/shop/:id" element={<ShopParams />} />
