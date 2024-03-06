@@ -5,7 +5,7 @@ function Footer(props) {
         <footer className="footer-section">
   <div className="container relative">
     <div className="sofa-img">
-      <img src="../assets/images/sofa.png" alt="Image" className="img-fluid" />
+      {/* <img src="../assets/images/sofa.png" alt="Image" className="img-fluid" /> */}
     </div>
     <div className="row">
       <div className="col-lg-8">
