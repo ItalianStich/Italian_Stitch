@@ -1453,9 +1453,9 @@ textarea {
     flex-wrap: wrap;
 }
 
-@media screen and (min-width: 1199px) {
+@media screen and (max-width: 575px) {
     .product-card {
-        /* width: 300px;/ */
+        margin-left: 120px;
     }
 }
 
