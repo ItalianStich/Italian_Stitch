@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
 
 * {
@@ -42,9 +41,9 @@ body.dark {
     --title-icon-color: #CCC;
 }
 
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
     width: 8px;
-}
+} */
 
 ::-webkit-scrollbar-track {
     background: #f1f1f1;
@@ -533,3 +532,13 @@ nav.close~.dashboard .top {
     color: red;
     font-size: 14px;
 }
+
+/* ************ ADMIN SIDE ARROW BUTTON CSS ************  */
+.addButtonContainer {
+    display: inline-block;
+    vertical-align: top;
+    margin-top: -9.5%;
+    margin-left: 57%;
+}
+
+/* ***************************************************** */

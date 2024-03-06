@@ -205,19 +205,15 @@ function ProductForm({ onHandleSubmit, updateData }) {
 
                         <>
                             {/* Labels for Size and Stock */}
-                            <div className='col-4' >
-                                {/* <label htmlFor={ecommerce-product-size}>Size</label> */}
+                            <div className='col-4'>
                                 <label className="form-label" htmlFor={`ecommerce-product-size`}>Size</label>
                             </div>
                             <div className='col-4'>
-                                {/* <label htmlFor={ecommerce-product-stock}>Stock</label> */}
                                 <label className="form-label" htmlFor={`ecommerce-product-stock`}>Stock</label>
                             </div>
 
-
                             {sizesAndStocks.map((input, index) => (
                                 <div style={{ display: 'flex', margin: '5px 0', height: '39px' }} key={index}>
-
                                     {/* Sizes */}
                                     <div className='col-4 mb-3' style={{ margin: "0 5px", width: '140px' }}>
                                         <input
@@ -232,7 +228,6 @@ function ProductForm({ onHandleSubmit, updateData }) {
                                             onBlur={handleBlur}
                                             required
                                         />
-                                        {/* {errors.sizesAndStocks?.[index]?.size && <p>{errors.sizesAndStocks[index].size}</p>} */}
                                     </div>
                                     {/* Stock */}
                                     <div className='col-4 mb-3' style={{ margin: "0 5px", width: '140px' }}>
@@ -248,15 +243,19 @@ function ProductForm({ onHandleSubmit, updateData }) {
                                             onBlur={handleBlur}
                                             required
                                         />
-                                        {/* {errors.sizesAndStocks?.[index]?.stock && <p>{errors.sizesAndStocks[index].stock}</p>} */}
                                     </div>
                                 </div>
                             ))}
+
                             {/* Add Button */}
-                            <div className="addButtonContainer">
-                                <Button className="addButton" variant="contained" onClick={handleAddSizeAndStock}>
-                                    <ArrowForwardIcon />
-                                </Button>
+                            <div className='row'>
+                                <div className='col-12 text-center'>
+                                    <div className="addButtonContainer">
+                                        <Button className="addButton" variant="contained" onClick={handleAddSizeAndStock}>
+                                            <ArrowForwardIcon />
+                                        </Button>
+                                    </div>
+                                </div>
                             </div>
                         </>
 
