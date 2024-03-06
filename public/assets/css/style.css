@@ -1462,12 +1462,14 @@ textarea {
 @media screen and (min-width: 992px) and (max-width: 1198px) {
     .product-card {
         width: 28%;
+        margin-left: 45px;
     }
 }
 
 @media screen and (min-width: 768px) and (max-width: 991px) {
     .product-card {
         width: 39%;
+        margin-left: 75px;
     }
 }
 
