@@ -19013,7 +19013,7 @@ body {
 }
 
 .menu {
-  display: flex;
+  /* display: flex; */
 }
 
 .menu .app-brand {
