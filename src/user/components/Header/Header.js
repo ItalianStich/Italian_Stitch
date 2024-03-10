@@ -64,7 +64,7 @@ function Header(props) {
                 <div className="row v-center">
                     <div className="header-item item-left">
                         <div className="logo">
-
+                            <NavLink to={"/"}><img src="../assets/img/italian.jpg" alt="" /></NavLink>
                         </div>
                     </div>
                     <div className="header-item item-center">
