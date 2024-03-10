@@ -73,7 +73,17 @@ function ProductForm({ onHandleSubmit, updateData }) {
             desc: '',
             prec: '',
             mrp: '',
-            sizesAndStocks: [{ size: '', stock: '' }]
+            sizesAndStocks: [{ size: '', stock: '' }],
+            Materialcomposition: '',
+            fittype: '',
+            sleevetype: '',
+            style: '',
+            Manufacturer: '',
+            Packer: '',
+            Importer: '',
+            weight: '',
+            dimensions: '',
+            quantity: ''
         },
         onSubmit: (values, { resetForm }) => {
             let obj = {
@@ -275,6 +285,112 @@ function ProductForm({ onHandleSubmit, updateData }) {
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 value={values.desc}
+                            />
+                        </div>
+
+                        <hr></hr>
+                        <label className="form-label" style={{ textAlign: 'center', fontSize: '18px' }}>PRODUCT DETAILS</label>
+
+                        <div className="col-6 mb-3">
+                            <label className="form-label" htmlFor="ecommerce-product-material">Material composition</label>
+                            <input type="text" className="form-control" id="ecommerce-product-name" placeholder="E.X 100% COTTON CORDUROY" aria-label="Product material" name="Materialcomposition"
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.Materialcomposition}
+                                required
+                            />
+                        </div>
+
+                        <div className="col-6 mb-3">
+                            <label className="form-label" htmlFor="ecommerce-product-fit-type">Fit type</label>
+                            <input type="text" className="form-control" id="ecommerce-product-name" placeholder="E.X REGULAR FIT" aria-label="fit-type" name="fittype"
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.fittype}
+                                required
+                            />
+                        </div>
+
+                        <div className="col-6 mb-3">
+                            <label className="form-label" htmlFor="ecommerce-product-Sleeve-type">Sleeve type</label>
+                            <input type="text" className="form-control" id="ecommerce-product-name" placeholder="E.X HALF SLEEVE" aria-label="Sleeve type" name="sleevetype"
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.sleevetype}
+                                required
+                            />
+                        </div>
+
+                        <div className="col-6 mb-3">
+                            <label className="form-label" htmlFor="ecommerce-product-style">Style</label>
+                            <input type="text" className="form-control" id="ecommerce-product-name" placeholder="E.X WESTERN" aria-label="Sleeve type" name="style"
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.style}
+                                required
+                            />
+                        </div>
+
+                        <hr></hr>
+                        <label className="form-label" style={{ textAlign: 'center', fontSize: '18px' }}>Additional Details</label>
+
+                        <div className="col-6 mb-3">
+                            <label className="form-label" htmlFor="ecommerce-product-Manufacturer">Manufacturer</label>
+                            <input type="text" className="form-control" id="ecommerce-product-name" placeholder="E.X SAROY" aria-label="Manufacturer" name="Manufacturer"
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.Manufacturer}
+                                required
+                            />
+                        </div>
+
+                        <div className="col-6 mb-3">
+                            <label className="form-label" htmlFor="ecommerce-product-Packer">Packer</label>
+                            <input type="text" className="form-control" id="ecommerce-product-name" placeholder="E.X SAROY" aria-label="Packer" name="Packer"
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.Packer}
+                                required
+                            />
+                        </div>
+
+                        <div className="col-6 mb-3">
+                            <label className="form-label" htmlFor="ecommerce-product-Importer">Importer</label>
+                            <input type="text" className="form-control" id="ecommerce-product-name" placeholder="E.X SAROY" aria-label="Importer" name="Importer"
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.Importer}
+                                required
+                            />
+                        </div>
+
+                        <div className="col-6 mb-3">
+                            <label className="form-label" htmlFor="ecommerce-product-Weight">Item Weight</label>
+                            <input type="text" className="form-control" id="ecommerce-product-name" placeholder="E.X 400 g" aria-label="weight" name="weight"
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.weight}
+                                required
+                            />
+                        </div>
+
+                        <div className="col-6 mb-3">
+                            <label className="form-label" htmlFor="ecommerce-product-Dimensions">Item Dimensions (LxWxH)</label>
+                            <input type="text" className="form-control" id="ecommerce-product-name" placeholder="E.X 17 x 3 x 15 Centimeters" aria-label="Dimensions" name="dimensions"
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.dimensions}
+                                required
+                            />
+                        </div>
+
+                        <div className="col-6 mb-3">
+                            <label className="form-label" htmlFor="ecommerce-product-Quantity">Net Quantity</label>
+                            <input type="text" className="form-control" id="ecommerce-product-name" placeholder="E.X 1.00 count" aria-label="Quantity" name="quantity"
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.quantity}
+                                required
                             />
                         </div>
 
