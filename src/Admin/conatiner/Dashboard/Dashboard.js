@@ -1,7 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import DashboardIcon from '@mui/icons-material/Dashboard';
+import { useDispatch, useSelector } from 'react-redux';
+import { getCategory } from "../../../user/redux/slice/category.slice";
+import { getSubcategory } from "../../../user/redux/slice/Subcategory.slice";
+import {getProduct} from '../../../user/redux/slice/Product.slice';
 
 function Dashboard(props) {
+    const dispatch = useDispatch();
+
+    const category = useSelector((state => state.category.category));
+    const subcategory = useSelector((state => state.subcategory.subcategory));
+    const product = useSelector((state => state.product.product));
+
+    useEffect(() => {
+        dispatch(getCategory());
+        dispatch(getSubcategory());
+        dispatch(getProduct());
+    }, [])
+
     return (
         <div className="dash-content">
             <div className="overview">
@@ -12,22 +28,22 @@ function Dashboard(props) {
                 <div className="boxes">
                     <div className="box box1">
                         <i className="uil uil-thumbs-up" />
-                        <span className="text">Total Likes</span>
-                        <span className="number">50,120</span>
+                        <span className="text">Total Category</span>
+                        <span className="number">{category.length}</span>
                     </div>
                     <div className="box box2">
                         <i className="uil uil-comments" />
-                        <span className="text">Comments</span>
-                        <span className="number">20,120</span>
+                        <span className="text">Total Subcategory</span>
+                        <span className="number">{subcategory.length}</span>
                     </div>
                     <div className="box box3">
                         <i className="uil uil-share" />
-                        <span className="text">Total Share</span>
-                        <span className="number">10,120</span>
+                        <span className="text">Total Product</span>
+                        <span className="number">{product.length}</span>
                     </div>
                 </div>
             </div>
-            <div className="activity">
+            {/* <div className="activity">
                 <div className="title">
                     <span class="text">Recent Activity</span>
                 </div>
@@ -83,7 +99,7 @@ function Dashboard(props) {
                         <span class="data-list">Liked</span>
                     </div>
                 </div>
-            </div>
+            </div> */}
         </div>
     );
 }
