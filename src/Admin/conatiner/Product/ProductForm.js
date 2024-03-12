@@ -292,15 +292,6 @@ function ProductForm({ onHandleSubmit, updateData }) {
                                 </div>
                             </>
 
-                            {/* <div className="col-7 mb-3 form-group">
-                                <label className="form-label" htmlFor="ecommerce-product-image" > Images </label>
-                                <input type="file" name="prec" className="form-control" id="prec"
-                                    onChange={(event) => setFieldValue("prec", event.target.files[0])} required />
-                                {
-                                    values.prec ? <img style={{ width: '100px' }} src={typeof values.prec === 'string' ? values.prec : URL.createObjectURL(values.prec)} alt={values.prec} />
-                                        : null}
-                            </div> */}
-
                             <div className="col-12 mb-3 form_field position-relative">
                                 <label className="form-label">Description</label>
 
