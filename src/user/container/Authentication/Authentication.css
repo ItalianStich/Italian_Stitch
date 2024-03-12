@@ -262,15 +262,39 @@
     }
 }
 
-@media screen and (max-width: 600px) {
+/* @media screen and (max-width: 600px) {
+    .forms {
+        max-width: 90%;
+    }
+} */
+
+@media screen and (max-width: 576px) {
+    .containerLoginPage {
+        width: 90%;
+        transform: translate(8%);
+        overflow-y: hidden;
+    }
     .forms {
         max-width: 90%;
     }
 }
 
-@media screen and (max-width: 576px) {
+@media screen and (max-width: 768px) {
     .containerLoginPage {
         width: 90%;
         transform: translate(9%);
+    }
+    .forms {
+        max-width: 90%;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .containerLoginPage {
+        width: 90%;
+        transform: translate(9%);
+    }
+    .forms {
+        max-width: 90%;
     }
 }
