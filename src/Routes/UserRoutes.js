@@ -11,6 +11,7 @@ import Cart from '../user/container/Cart';
 import Checkout from '../user/container/Checkout';
 import Thankyou from '../user/container/Thankyou';
 import ShopDetails from '../user/container/Shop/ShopDetails';
+import Authentication from '../user/container/Authentication/Authentication';
 // import PrivateRoutes from './PrivateRoutes';
 
 function UserRoutes(props) {
@@ -30,6 +31,8 @@ function UserRoutes(props) {
 
                 <Route exact path='/checkout' element={<Checkout />} />
                 <Route exact path='/thankyou' element={<Thankyou />} />
+
+                <Route exact path='/authentication' element={<Authentication />} />
 
                 {/* <Route path="/shop" element={<Shop />} />
                 <Route path="/shop/:id" element={<ShopParams />} />
