@@ -12,7 +12,8 @@ import Checkout from '../user/container/Checkout';
 import Thankyou from '../user/container/Thankyou';
 import ShopDetails from '../user/container/Shop/ShopDetails';
 import Authentication from '../user/container/Authentication/Authentication';
-// import PrivateRoutes from './PrivateRoutes';
+import Favourite from '../user/Containers/Favourite/Favourite'
+import PrivateRoutes from './PrivateRoutes';
 
 function UserRoutes(props) {
     return (
@@ -28,6 +29,10 @@ function UserRoutes(props) {
                 {/* <Route element={<PrivateRoutes />}> */}
                 <Route exact path="/cart" element={<Cart />} />
                 {/* </Route> */}
+
+                <Route element={<PrivateRoutes />}>
+                <Route path="/favourite" element={<Favourite />} />
+                </Route>
 
                 <Route exact path='/checkout' element={<Checkout />} />
                 <Route exact path='/thankyou' element={<Thankyou />} />

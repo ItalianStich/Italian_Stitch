@@ -11,7 +11,7 @@ function PrivateRoutes(props) {
         return <Outlet />
     } else {
         dispatch(setAlert({ text: 'You must be logged in to access here.', color: 'error' }))
-        return <Navigate to={'/auth'} />
+        return <Navigate to={'/authentication'} />
     }
 }
 

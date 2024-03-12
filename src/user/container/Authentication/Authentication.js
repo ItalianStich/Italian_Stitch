@@ -122,6 +122,10 @@ function Authentication(props) {
                                     </div>
                                 )}
 
+                                <div className="col-md-12 mt-0 text-end">
+                                    {formType === 'login' ? (<NavLink onClick={() => setFormType('forgot')}> Forgot Password? </NavLink>) : null}
+                                </div>
+
                                 <div className="col-md-12 my-4">
                                     {
                                         formType === "login" ?

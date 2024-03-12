@@ -5,6 +5,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getCategory } from '../../redux/slice/category.slice';
 import { getSubcategory } from '../../redux/slice/Subcategory.slice'
 import { Link } from 'react-router-dom';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 function Header(props) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -119,9 +122,19 @@ function Header(props) {
                         </nav>
                     </div>
                     <div className="header-item item-right">
-                        <a href="#"><i className="fas fa-search" /></a>
+                       
+                        <NavLink to={'/cart'}>
+                            <ShoppingCartIcon />
+                        </NavLink>
+                        <NavLink to={'/favourite'}>
+                            <FavoriteIcon />
+                        </NavLink>
+                        <NavLink to={'/authentication'}>
+                            <AccountCircleIcon />
+                        </NavLink>
+                        {/* <a href="#"><i className="fas fa-search" /></a>
                         <a href="#"><i className="far fa-heart" /></a>
-                        <a href="#"><i className="fas fa-shopping-cart" /></a>
+                        <a href="#"><i className="fas fa-shopping-cart" /></a> */}
                         <div className="mobile-menu-trigger" onClick={toggleMenu}>
                             <span />
                         </div>
