@@ -26,7 +26,7 @@ function UserContact() {
                 <div className="row">
                     <div className="col-md-12">
                         <div className="card">
-                            <div className="card-body">
+                            <div className="card-body"  style={{padding: '0px'}}>
                                 <div className="table-responsive">
                                     <table className="table">
                                         <thead>
