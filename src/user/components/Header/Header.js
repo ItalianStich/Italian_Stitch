@@ -169,7 +169,7 @@ function Header(props) {
                                     <FavoriteIcon sx={{ color: '#2c4964', fontSize: '20px' }} />
                                 </Badge>
                             </Link>
-                            {checklogin ?
+                            {/* {checklogin ?
                                 <>
                                     <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
                                         <IconButton
@@ -242,8 +242,7 @@ function Header(props) {
                                 </>
                                 :
                                 <NavLink to={'/authentication'}> <AccountCircleIcon />My Account </NavLink>
-                                // <Button path="/auth" btnType={Link} classes={'ms-xl-3'}>Login / Signup</Button>
-                            }
+                            } */}
                         </div>
                         {/* <div className="header-item item-right">
                        
