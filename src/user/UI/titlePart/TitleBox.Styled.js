@@ -16,11 +16,11 @@ export const OrangeTitle = styled.span`
 export const Title = styled.h2`
     font-size: 32px;
     font-weight: bold;
-    margin-bottom: 20px;
-    padding-bottom: 10px;
+    /* margin-bottom: 20px; */
+    /* padding-bottom: 10px; */
     position: relative;
     color: #2c4964;
-    &:before {
+    /* &:before {
         content: '';
         position: absolute;
         display: block;
@@ -39,6 +39,6 @@ export const Title = styled.h2`
         background: #49D1D1;
         bottom: 0;
         left: ${({ align }) => align === 'left' ? '0' : 'calc(50% - 20px)'};
-    }
+    } */
 `
 export const SubTitle = styled.p``

@@ -1,82 +1,106 @@
+import { useFormik } from 'formik';
 import React from 'react';
+import * as Yup from "yup";
+import TitleBox from '../UI/titlePart/TitleBox';
+import { useDispatch } from 'react-redux';
+import { addNewContact } from '../redux/slice/Contact.slice';
+import { setAlert } from '../redux/slice/Alert.slice';
 
-function Contact(props) {
+const SignUpSchema = Yup.object({
+    name: Yup.string()
+        .matches(/^[A-Za-z ]+$/, "Name must only contain characters.")
+        .min(2)
+        .required("Please enter your name."),
+    email: Yup.string()
+        .email()
+        .required("Please enter email address."),
+    subject: Yup.mixed()
+        .required("Please enter subject."),
+    number: Yup.number().required(),
+    message: Yup.mixed()
+        .required("Please enter any message.")
+});
+
+const initialValues = { name: '', email: '', subject: '', number: '', message: '' }
+const Contact = () => {
+    const dispatch = useDispatch();
+
+    const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
+        validationSchema: SignUpSchema,
+        initialValues: initialValues,
+        onSubmit: async (values, { resetForm }) => {
+            try {
+                await dispatch(addNewContact(values));
+                resetForm();
+                dispatch(setAlert({ text: 'Message sent successfully!', color: 'success' }));
+            } catch (error) {
+                console.error('Error sending message:', error);
+                dispatch(setAlert({ text: 'Failed to send message. Please try again later.', color: 'error' }));
+            }
+        }
+    });
+
     return (
-        <div className="untree_co-section">
-            <div className="container">
-                <div className="block">
-                    <div className="row justify-content-center">
-                        <div className="col-md-8 col-lg-8 pb-4">
-                            <div className="row mb-5">
-                                <div className="col-lg-4">
-                                    <div className="service no-shadow align-items-center link horizontal d-flex active" data-aos="fade-left" data-aos-delay={0}>
-                                        <div className="service-icon color-1 mb-4">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} fill="currentColor" className="bi bi-geo-alt-fill" viewBox="0 0 16 16">
-                                                <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
-                                            </svg>
-                                        </div> {/* /.icon */}
-                                        <div className="service-contents">
-                                            <p>43 Raymouth Rd. Baltemoer, London 3910</p>
-                                        </div> {/* /.service-contents*/}
-                                    </div> {/* /.service */}
-                                </div>
-                                <div className="col-lg-4">
-                                    <div className="service no-shadow align-items-center link horizontal d-flex active" data-aos="fade-left" data-aos-delay={0}>
-                                        <div className="service-icon color-1 mb-4">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} fill="currentColor" className="bi bi-envelope-fill" viewBox="0 0 16 16">
-                                                <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555zM0 4.697v7.104l5.803-3.558L0 4.697zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757zm3.436-.586L16 11.801V4.697l-5.803 3.546z" />
-                                            </svg>
-                                        </div> {/* /.icon */}
-                                        <div className="service-contents">
-                                            <p>info@yourdomain.com</p>
-                                        </div> {/* /.service-contents*/}
-                                    </div> {/* /.service */}
-                                </div>
-                                <div className="col-lg-4">
-                                    <div className="service no-shadow align-items-center link horizontal d-flex active" data-aos="fade-left" data-aos-delay={0}>
-                                        <div className="service-icon color-1 mb-4">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} fill="currentColor" className="bi bi-telephone-fill" viewBox="0 0 16 16">
-                                                <path fillRule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z" />
-                                            </svg>
-                                        </div> {/* /.icon */}
-                                        <div className="service-contents">
-                                            <p>+1 294 3925 3939</p>
-                                        </div> {/* /.service-contents*/}
-                                    </div> {/* /.service */}
-                                </div>
-                            </div>
-                            <form>
+        <main>
+            <section id="contact" className="contact">
+                <div className="container">
+                    <TitleBox
+                        titleText='Contact'
+                    />
+                </div>
+                <div className="container">
+                    <div className="row justify-content-center mt-1"> {/* Centering the row */}
+                        <div className="col-lg-8">
+                            <form onSubmit={handleSubmit} className="php-email-form">
                                 <div className="row">
-                                    <div className="col-6">
-                                        <div className="form-group">
-                                            <label className="text-black" htmlFor="fname">First name</label>
-                                            <input type="text" className="form-control" id="fname" />
-                                        </div>
+                                    <div className="col-md-6 form-group">
+                                        <input type="text" name="name" className="form-control" id="name" placeholder="Your Name"
+                                            value={values.name}
+                                            onChange={handleChange}
+                                            onBlur={handleBlur} />
+                                        {errors.name && touched.name ? <span className='form-error'>{errors.name}</span> : null}
                                     </div>
-                                    <div className="col-6">
-                                        <div className="form-group">
-                                            <label className="text-black" htmlFor="lname">Last name</label>
-                                            <input type="text" className="form-control" id="lname" />
-                                        </div>
+                                    <div className="col-md-6 form-group mt-4 mt-md-0">
+                                        <input type="email" className="form-control" name="email" id="email" placeholder="Your Email"
+                                            value={values.email}
+                                            onChange={handleChange}
+                                            onBlur={handleBlur} />
+                                        {errors.email && touched.email ? <span className='form-error'>{errors.email}</span> : null}
                                     </div>
                                 </div>
-                                <div className="form-group">
-                                    <label className="text-black" htmlFor="email">Email address</label>
-                                    <input type="email" className="form-control" id="email" />
+
+                                <div className='row'>
+                                    <div className="col-md-6 form-group mt-4">
+                                        <input type="text" className="form-control" name="subject" id="subject" placeholder="Subject"
+                                            value={values.subject}
+                                            onChange={handleChange}
+                                            onBlur={handleBlur} />
+                                        {errors.subject && touched.subject ? <span className='form-error'>{errors.subject}</span> : null}
+                                    </div>
+
+                                    <div className="col-md-6 form-group mt-4">
+                                        <input type="tel" className="form-control" name="number" id="number" placeholder="Mobile Number"
+                                            value={values.number}
+                                            onChange={handleChange}
+                                            onBlur={handleBlur} />
+                                        {errors.number && touched.number ? <span className='form-error'>{errors.number}</span> : null}
+                                    </div>
                                 </div>
-                                <div className="form-group mb-5">
-                                    <label className="text-black" htmlFor="message">Message</label>
-                                    <textarea name className="form-control" id="message" cols={30} rows={5} defaultValue={""} />
+
+                                <div className="form-group mt-4">
+                                    <textarea className="form-control" name="message" rows={5} placeholder="Message"
+                                        value={values.message}
+                                        onChange={handleChange}
+                                        onBlur={handleBlur} />
+                                    {errors.message && touched.message ? <span className='form-error'>{errors.message}</span> : null}
                                 </div>
-                                {/* <button type="submit" className="btn1 btn-primary-hover-outline">Send Message</button> */}
-                                <button className="btn2 btn2-primary" type='submit'> Send Message </button>
+                                <div className="text-center mt-5"><button type="submit" className="btn2 btn2-primary">Send Message</button></div>
                             </form>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-
+            </section>
+        </main>
     );
 }
 

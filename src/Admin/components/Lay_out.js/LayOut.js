@@ -9,6 +9,7 @@ import { logoutRequest } from '../../../user/redux/action/auth.action';
 import Button from '../../../user/components/UI/button/Button';
 import Inventory2OutlinedIcon from '@mui/icons-material/Inventory2Outlined';
 import { Logout } from '@mui/icons-material';
+import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle';
 
 function Lay_out({ children }) {
     let [toggle, setToogle] = useState(true);
@@ -55,6 +56,12 @@ function Lay_out({ children }) {
                             <NavLink to="/admin/product">
                                 <AddShoppingCartIcon style={{ marginRight: '18px', fontSize: '28px', color: '#707070' }} />
                                 <span className="link-name">Product</span>
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="/admin/user-contact">
+                                <SupervisedUserCircleIcon style={{ marginRight: '18px', fontSize: '28px', color: '#707070' }} />
+                                <span className="link-name">User Contact</span>
                             </NavLink>
                         </li>
                         {/* <li>

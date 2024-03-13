@@ -7,6 +7,7 @@ import OrderDetails from "../Admin/conatiner/Order/OrderDetails";
 import Product from "../Admin/conatiner/Product/Product";
 import Category from "../Admin/conatiner/Category/Category";
 import Subcategory from "../Admin/conatiner/Subcategory/Subcategory";
+import UserContact from "../Admin/conatiner/user-contact/UserContact";
 
 function AdminRoutes(props) {
     return (
@@ -18,6 +19,7 @@ function AdminRoutes(props) {
                 <Route exact path='/product' element={<Product />} />
                 <Route exact path='/order' element={<Order />} />
                 <Route exact path="/order/orderdetails/:id" element={<OrderDetails />} />
+                <Route exact path="/user-contact" element={<UserContact />} />
             </Routes>
         </LayOut>
     );
