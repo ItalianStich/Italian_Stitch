@@ -169,7 +169,7 @@ function Header(props) {
                                     <FavoriteIcon sx={{ color: '#2c4964', fontSize: '20px' }} />
                                 </Badge>
                             </Link>
-                            {/* {checklogin ?
+                            {checklogin ?
                                 <>
                                     <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
                                         <IconButton
@@ -239,10 +239,13 @@ function Header(props) {
                                             Logout
                                         </MenuItem>
                                     </Menu>
+                                    <div className="mobile-menu-trigger" onClick={toggleMenu}>
+                                        <span />
+                                    </div>
                                 </>
                                 :
                                 <NavLink to={'/authentication'}> <AccountCircleIcon />My Account </NavLink>
-                            } */}
+                            }
                         </div>
                         {/* <div className="header-item item-right">
                        
@@ -255,9 +258,7 @@ function Header(props) {
                         <NavLink to={'/authentication'}>
                             <AccountCircleIcon />
                         </NavLink>
-                        <div className="mobile-menu-trigger" onClick={toggleMenu}>
-                            <span />
-                        </div>
+                        
                     </div> */}
                     </div>
                 </div>
