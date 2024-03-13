@@ -98,7 +98,7 @@ a.more {
     height: 600px;
 }
 
-/* .one {
+.one {
     background-image: url(../img/home.jpg);
 }
 
@@ -108,7 +108,7 @@ a.more {
 
 .three {
     background-image: url(../img/banner/banner2.jpg);
-} */
+}
 
 @media (max-width: 767px) {
     .bg-image {
@@ -1582,13 +1582,13 @@ textarea {
 
 /* ******** Slider next button problem ******************************** */
 
-@media screen and (max-width: 412px) and (max-height: 789px) {
+/* @media screen and (max-width: 412px) and (max-height: 789px) {
     .slick-slider .slick-next {
         display: none !important;
     }
     body {
         overflow-x: hidden;
     }
-}
+} */
 
 /* ********************************************************************* */

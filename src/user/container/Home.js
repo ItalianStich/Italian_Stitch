@@ -4,20 +4,21 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 function Home(props) {
-    // const settings = {
-    //     dots: false,
-    //     infinite: true,
-    //     speed: 500,
-    //     slidesToShow: 1,
-    //     slidesToScroll: 1,
-    //     autoplay: true,
-    //     autoplaySpeed: 3000
-    // };
+    const settings = {
+        dots: false,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 3000,
+        nextArrow: <></>
+    };
 
     return (
         <div>
             <section>
-                {/* <Slider {...settings}> */}
+                <Slider {...settings}>
                     <div>
                         <div className="bg-image one">
                             {/* <div className="slide-content slide-animation">
@@ -45,7 +46,7 @@ function Home(props) {
                             </div> */}
                         </div>
                     </div>
-                {/* </Slider> */}
+                </Slider>
             </section>
             {/* End Hero Section */}
             {/* Start Product Section */}
