@@ -1586,6 +1586,9 @@ textarea {
     .slick-slider .slick-next {
         display: none !important;
     }
+    body {
+        overflow-x: hidden;
+    }
 }
 
 /* ********************************************************************* */
