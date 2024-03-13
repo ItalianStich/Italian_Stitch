@@ -1579,3 +1579,13 @@ textarea {
     display: inline-block;
 
 }
+
+/* ******** Slider next button problem ******************************** */
+
+@media screen and (max-width: 412px) and (max-height: 789px) {
+    .slick-next {
+        display: none !important;
+    }
+}
+
+/* ********************************************************************* */
