@@ -98,7 +98,7 @@ a.more {
     height: 600px;
 }
 
-.one {
+/* .one {
     background-image: url(../img/home.jpg);
 }
 
@@ -108,7 +108,7 @@ a.more {
 
 .three {
     background-image: url(../img/banner/banner2.jpg);
-}
+} */
 
 @media (max-width: 767px) {
     .bg-image {
