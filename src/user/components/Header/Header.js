@@ -26,6 +26,12 @@ function Header(props) {
     const subcategory = useSelector((state => state.subcategory));
     const checklogin = useSelector((state => state.auth.user));
 
+    const cartState = useSelector(state => state.cart);
+    let addedCartData = 0;
+    if (cartState.items) {
+        addedCartData = cartState.items.reduce((acc, val) => acc + val.quantity, 0);
+    }
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -158,19 +164,18 @@ function Header(props) {
                         </div>
 
                         <div className='header-item item-right'>
-
-                            <Link to='/cart'  style={{ marginRight: '-2px' }}>
-                                <Badge className='ms-3' badgeContent={1} color="success">
-                                    <CartIcon sx={{ color: '#2c4964', fontSize: '20px' }} />
-                                </Badge>
-                            </Link>
-                            <Link to='/favourite'  style={{ paddingRight: '9px' }} >
-                                <Badge className='ms-3' badgeContent={1} color="success">
-                                    <FavoriteIcon sx={{ color: '#2c4964', fontSize: '20px' }} />
-                                </Badge>
-                            </Link>
                             {checklogin ?
                                 <>
+                                    <Link to='/cart' style={{ marginRight: '-2px' }}>
+                                        <Badge className='ms-3' badgeContent={addedCartData} color="success">
+                                            <CartIcon sx={{ color: '#2c4964', fontSize: '20px' }} />
+                                        </Badge>
+                                    </Link>
+                                    <Link to='/favourite' style={{ paddingRight: '0px' }} >
+                                        <Badge className='ms-3' badgeContent={1} color="success">
+                                            <FavoriteIcon sx={{ color: '#2c4964', fontSize: '20px' }} />
+                                        </Badge>
+                                    </Link>
                                     <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
                                         <IconButton
                                             onClick={profileOpen}
@@ -239,13 +244,13 @@ function Header(props) {
                                             Logout
                                         </MenuItem>
                                     </Menu>
-                                    <div className="mobile-menu-trigger" onClick={toggleMenu}>
-                                        <span />
-                                    </div>
                                 </>
                                 :
                                 <NavLink to={'/authentication'}> <AccountCircleIcon />My Account </NavLink>
                             }
+                            <div className="mobile-menu-trigger" onClick={toggleMenu}>
+                                <span />
+                            </div>
                         </div>
                         {/* <div className="header-item item-right">
                        

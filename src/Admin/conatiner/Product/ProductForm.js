@@ -85,7 +85,8 @@ function ProductForm({ onHandleSubmit, updateData }) {
             Importer: '',
             weight: '',
             dimensions: '',
-            quantity: ''
+            quantity: '',
+            brand: ''
         },
         onSubmit: (values, { resetForm }) => {
             let obj = {
@@ -201,7 +202,7 @@ function ProductForm({ onHandleSubmit, updateData }) {
                                 {errors.sub_name && touched.sub_name ? <span className='form-error-addPro'>{errors.sub_name}</span> : null}
                             </div>
 
-                            <div className="col-12 mb-3">
+                            <div className="col-6 mb-3">
                                 <label className="form-label" htmlFor="ecommerce-product-name">Name</label>
                                 <input type="text" className="form-control" id="ecommerce-product-name" placeholder="Product Name" aria-label="Product title" name="name"
                                     onChange={handleChange}
@@ -212,6 +213,16 @@ function ProductForm({ onHandleSubmit, updateData }) {
                                 {/* {errors.name && touched.name ? (<span className="d-block position-absolute form-error">{errors.name}</span>) : null} */}
                             </div>
 
+                            <div className="col-6 mb-3">
+                                <label className="form-label" htmlFor="ecommerce-product-name">Brand Name</label>
+                                <input type="text" className="form-control" id="ecommerce-product-name" placeholder="Brand Name" aria-label="Product title" name="brand"
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.brand}
+                                    required
+                                />
+                                {/* {errors.name && touched.name ? (<span className="d-block position-absolute form-error">{errors.name}</span>) : null} */}
+                            </div>
 
                             <div className="col-6 mb-3">
                                 <label className="form-label" htmlFor="ecommerce-product-price">Price</label>
