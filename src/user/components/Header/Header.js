@@ -185,7 +185,7 @@ function Header(props) {
                                             aria-haspopup="true"
                                             aria-expanded={open ? 'true' : undefined}
                                         >
-                                            <Avatar sx={{ width: 35, height: 35 }}><img className='w-100' src='' /></Avatar>
+                                            <Avatar sx={{ width: 35, height: 35 }}><img className='w-100' src='https://firebasestorage.googleapis.com/v0/b/italian-stitch-b0a04.appspot.com/o/user_profile%2F121792221.png?alt=media&token=c4fb3819-cfcd-49f7-b002-18111a10ddc6' /></Avatar>
                                         </IconButton>
                                     </Box>
                                     <Menu
@@ -223,11 +223,11 @@ function Header(props) {
                                         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                                         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }} >
                                         <MenuItem onClick={profileClose}>
-                                            <Avatar sx={{ width: 35, height: 35 }}><img className='w-100' src='' /></Avatar>
+                                            <Avatar sx={{ width: 35, height: 35 }}><img className='w-100' src='https://firebasestorage.googleapis.com/v0/b/italian-stitch-b0a04.appspot.com/o/user_profile%2F121792221.png?alt=media&token=c4fb3819-cfcd-49f7-b002-18111a10ddc6' /></Avatar>
                                             Profile
                                         </MenuItem>
                                         <MenuItem onClick={profileClose}>
-                                            <Avatar sx={{ width: 35, height: 35 }}><img className='w-100' src='' /></Avatar>
+                                            <Avatar sx={{ width: 35, height: 35 }}><img className='w-100' src='https://firebasestorage.googleapis.com/v0/b/italian-stitch-b0a04.appspot.com/o/user_profile%2F121792221.png?alt=media&token=c4fb3819-cfcd-49f7-b002-18111a10ddc6' /></Avatar>
                                             My Account
                                         </MenuItem>
                                         <Divider />

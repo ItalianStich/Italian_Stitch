@@ -8,6 +8,7 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import { decrementQuantity, incrementQuantity, removeItemFromCart } from '../redux/action/cart.action';
 import { setAlert } from '../redux/slice/Alert.slice';
 import CloseIcon from '@mui/icons-material/Close';
+import TitleBox from '../UI/titlePart/TitleBox';
 
 function Cart(props) {
     const dispatch = useDispatch();
@@ -40,8 +41,14 @@ function Cart(props) {
     }
 
     return (
-        <div className="untree_co-section before-footer-section">
+        <div className="untree_co-section1">
+            <TitleBox
+                    titleText='Your Carts'
+                    subTitleText={[
+                        'Welcome to cart. You can see here your cart product. Thank you !!!'
+                    ]} />
             <div className="container">
+                
                 <div className="row mb-5">
                     <form className="col-md-12" method="post">
                         <div className="site-blocks-table">
