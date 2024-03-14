@@ -26,11 +26,8 @@ function UserRoutes(props) {
                 <Route exact path="/about" element={<About />} />
                 <Route exact path="/contact" element={<Contact />} />
 
-                {/* <Route element={<PrivateRoutes />}> */}
-                <Route exact path="/cart" element={<Cart />} />
-                {/* </Route> */}
-
                 <Route element={<PrivateRoutes />}>
+                <Route exact path="/cart" element={<Cart />} />
                 <Route path="/favourite" element={<Favourite />} />
                 </Route>
 
@@ -38,25 +35,7 @@ function UserRoutes(props) {
                 <Route exact path='/thankyou' element={<Thankyou />} />
 
                 <Route exact path='/authentication' element={<Authentication />} />
-
-                {/* <Route path="/shop" element={<Shop />} />
-                <Route path="/shop/:id" element={<ShopParams />} />
-                <Route path="/shopdetails/:id" element={<ShopDetail />} />
-                <Route path="/product/:category_name/:id" element={<ProductList />} />
-
-                <Route path="/blog" element={<Blog />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/contact" element={<Contact />} />
-
-                <Route path='/orderauth' element={<OrderAuth />} />
-
-                <Route element={<PrivateRoutes />}>
-                    <Route path="/cart" element={<Cart />} />
-                </Route>
-
-                <Route path="/favourite" element={<Favourite />} />
-
-                <Route path="/auth" element={<Auth />} /> */}
+                
             </Routes>
             <Footer />
         </>
