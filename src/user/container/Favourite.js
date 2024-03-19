@@ -5,7 +5,6 @@ import { setAlert } from '../redux/slice/Alert.slice';
 import TitleBox from '../UI/titlePart/TitleBox';
 import CartIcon from '@mui/icons-material/ShoppingCart';
 import { Link } from 'react-router-dom';
-import Badge from '@mui/material/Badge';
 
 function Favourite() {
     const dispatch = useDispatch();

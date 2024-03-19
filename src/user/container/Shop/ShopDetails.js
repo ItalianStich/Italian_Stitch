@@ -120,7 +120,7 @@ function ShopDetails(props) {
                                                 </div>
                                                 <button className="btn btn-primary shadow-0" style={{ marginRight: 8 }} onClick={() => handleAddToCart(value)}> <i className="me-1 fa fa-shopping-basket" /> Add to cart </button>
                                                 <NavLink className="btn btn-warning shadow-0" style={{ marginRight: 8 }} onClick={() => addToFavourite(value.id)}>
-                                                    <i className="me-1 fa fa-heart fa-lg" /> {isAlreadyFavourite ? 'Remove from Wishlist' : 'Add to Wishlist'}
+                                                    <i className="me-1 fa fa-heart fa-lg" /> {isAlreadyFavourite ? 'Remove to Wishlist' : 'Add to Wishlist'}
                                                 </NavLink>
                                             </div>
                                         </main>
