@@ -5,6 +5,7 @@ import { setAlert } from '../redux/slice/Alert.slice';
 import TitleBox from '../UI/titlePart/TitleBox';
 import CartIcon from '@mui/icons-material/ShoppingCart';
 import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 function Favourite() {
     const dispatch = useDispatch();
@@ -44,28 +45,31 @@ function Favourite() {
                 newFilterProductData.length > 0 ? (
                     <section id="product2" className="section-p2" style={{ display: 'flex', flexWrap: 'wrap' }}>
                         {newFilterProductData.map((item, index) => (
-                            console.log(item),
-                            <div className="col-md-3" key={`${item.id}_${index}`} style={{ flex: '0 0 25%' }}>
-                                <div className="product-card">
+                            <NavLink to={'/product_details/' + item.id} key={item.id} target="_blank">
+                                <div className="col-md-3" key={`${item.id}_${index}`} style={{ flex: '0 0 25%' }}>
+                                    <div className="product-card">
 
-                                    <div className="badge">Hot</div>
-                                    <div className="product-tumb">
-                                        <img src={item.prec} alt={item.alt} />
-                                    </div>
-                                    <div className="product-details">
-                                        <span className="product-catagory">{item.name} <Link onClick={() => handleCart(item.id)} style={{ marginLeft: '168px' }}>
+                                        <div className="badge">Hot</div>
+                                        <div className="product-tumb">
+                                            <img src={item.prec} alt={item.alt} />
+                                        </div>
+                                        <div className="product-details">
+                                            <span className="product-catagory">{item.name} </span>
+                                            {/* <Link onClick={() => handleCart(item.id)} style={{ marginLeft: '168px' }}>
                                             <CartIcon sx={{ color: '#2c4964', fontSize: '23px' }} />
-                                        </Link></span>
-                                        {/* <button onClick={() => handleCart(item.id)}><CartIcon></CartIcon></button> */}
+                                        </Link> */}
 
-                                        <p>{`${item.desc}...`}</p>
-                                        <div className="product-bottom-details">
-                                            <div className="product-price">₹ {item.price} &nbsp; </div>
-                                            <div className="product-price1">₹ {item.mrp}</div>
+                                            {item.desc && (
+                                                <p>{`${item.desc.substring(0, 25)}...`}</p>
+                                            )}
+                                            <div className="product-bottom-details">
+                                                <div className="product-price">₹ {item.price} &nbsp; </div>
+                                                <div className="product-price1">₹ {item.mrp}</div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </NavLink>
                         ))}
                     </section>
                 ) : null
