@@ -71,6 +71,14 @@ function ShopDetails(props) {
                                         <main className="col-lg-6">
                                             <div className="ps-lg-3">
                                                 <h4 className="title text-dark"> {value.name} </h4>
+                                                <p>{value.desc}</p>
+
+
+                                                <div className="mb-3">
+                                                    <span className="h5">₹ {value.price} </span>
+                                                    <span className="line-through">₹ {value.mrp} </span>
+                                                    <span className="text-muted" style={{ fontSize: '18px' }}> ({Math.round((value.mrp - value.price) * 100 / value.mrp)}% off)</span>
+                                                </div>
                                                 <div className="d-flex flex-row my-3">
                                                     <div className="text-warning mb-1 me-2">
                                                         <i className="fa fa-star" />
@@ -88,13 +96,6 @@ function ShopDetails(props) {
                                                         }
                                                     </span>
                                                 </div>
-
-                                                <div className="mb-3">
-                                                    <span className="h5">₹ {value.price} </span>
-                                                    <span className="line-through">₹ {value.mrp} </span>
-                                                    <span className="text-muted" style={{ fontSize: '18px' }}> ({Math.round((value.mrp - value.price) * 100 / value.mrp)}% off)</span>
-                                                </div>
-                                                <p>{value.desc}</p>
                                                 <div className="row">
                                                     <dt className="col-3">Fit Type</dt>
                                                     <dd className="col-9">{value.fittype}</dd>
@@ -107,7 +108,7 @@ function ShopDetails(props) {
                                                 </div>
                                                 <hr />
                                                 <div className="row mb-4">
-                                                    <div className="col-md-4 col-6" style={{marginBottom: 30}}>
+                                                    <div className="col-md-4 col-6" style={{ marginBottom: 30 }}>
                                                         <label className="mb-2">Size</label>
                                                         <select className="form-select border border-secondary" style={{ height: 40, width: 130 }}>
                                                             {

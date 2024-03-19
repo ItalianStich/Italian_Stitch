@@ -131,13 +131,13 @@ function Header(props) {
                                                 category.category.map((value) => {
                                                     return (
                                                         <div className="list-item" key={value.id}>
-                                                            <NavLink to={"/product/" + value.category_name + '/' + value.id}><h4 className="title">{value.category_name}</h4></NavLink>
+                                                            <NavLink to={`/shop-cate/${value.id}`}><h4 className="title">{value.category_name}</h4></NavLink>
                                                             <ul>
                                                                 {
                                                                     subcategory.subcategory.map((subCategory) => {
                                                                         if (value.id === subCategory.category_id) {
                                                                             return (
-                                                                                <li key={subCategory.id}><Link to={'/shop/' + subCategory.id}>{subCategory.sub_name}</Link></li>
+                                                                                <li key={subCategory.id}><Link to={'/product/' + subCategory.id}>{subCategory.sub_name}</Link></li>
                                                                             )
                                                                         } else {
                                                                             return null
