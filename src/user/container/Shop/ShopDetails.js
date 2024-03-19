@@ -3,29 +3,54 @@ import { getProduct } from '../../redux/slice/Product.slice';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { addToCart } from '../../redux/action/cart.action';
+import { addToCart, incrementQuantity, decrementQuantity } from '../../redux/action/cart.action';
 import { setAlert } from '../../redux/slice/Alert.slice';
-import { addOnStoreAndAPI } from '../../redux/action/favourite.action';
+import { addOnStoreAndAPI, removeOnStoreAndAPI } from '../../redux/action/favourite.action';
+
 
 function ShopDetails(props) {
     const { id } = useParams();
     const dispatch = useDispatch();
-    const product = useSelector((state => state.product))
+    const [isAlreadyFavourite, setIsAlreadyFavourite] = React.useState(false);
+    const [quantity, setQuantity] = React.useState(1);
+
+    const product = useSelector((state => state.product));
+    const favouriteState = useSelector((state => state.favourites));
 
     React.useEffect(() => {
         dispatch(getProduct())
     }, [id]);
 
+    React.useEffect(() => {
+        setIsAlreadyFavourite(favouriteState.favItmes.some(item => item.fid === id));
+    }, [favouriteState, id]);
+
+    // const quantityDecrement = (id) => {
+    //     dispatch(decrementQuantity(id));
+    //     setQuantity(quantity - 1);
+    // }
+    // const quantityIncrement = (id) => {
+    //     dispatch(incrementQuantity(id));
+    //     setQuantity(quantity + 1);
+    // }
+
     const handleAddToCart = (data) => {
         dispatch(setAlert({ text: data.name + ' is successfully added in cart', color: 'success' }))
-        dispatch(addToCart(id));
+        dispatch(addToCart(id, quantity));
     };
 
-    const handleAddToFav = (data) => {
-        dispatch(setAlert({ text: data.name + ' is successfully added in favourite', color: 'success' }))
-        dispatch(addOnStoreAndAPI(data));
+    const addToFavourite = (id) => {
+        const productToAddOrRemove = product.product.find(val => val.id === id);
+        if (isAlreadyFavourite) {
+            dispatch(setAlert({ text: productToAddOrRemove.name + ' is successfully removed from Wishlist', color: 'success' }));
+            dispatch(removeOnStoreAndAPI(id));
+        } else {
+            dispatch(setAlert({ text: productToAddOrRemove.name + ' is successfully added to Wishlist', color: 'success' }));
+            dispatch(addOnStoreAndAPI(id));
+        }
+        setIsAlreadyFavourite(!isAlreadyFavourite);
     }
-    
+
     return (
         <div>
             <section className="py-5">
@@ -35,7 +60,7 @@ function ShopDetails(props) {
                         product.product.map((value) => {
                             if (value.id === id) {
                                 return (
-                                    <div className="row gx-5"  key={value.id}>
+                                    <div className="row gx-5" key={value.id}>
                                         <aside className="col-lg-6">
                                             <div className="border rounded-4 mb-3 d-flex justify-content-center">
                                                 <NavLink className="rounded-4" data-type="image">
@@ -82,7 +107,7 @@ function ShopDetails(props) {
                                                 </div>
                                                 <hr />
                                                 <div className="row mb-4">
-                                                    <div className="col-md-4 col-6">
+                                                    <div className="col-md-4 col-6" style={{marginBottom: 30}}>
                                                         <label className="mb-2">Size</label>
                                                         <select className="form-select border border-secondary" style={{ height: 40, width: 130 }}>
                                                             {
@@ -92,21 +117,11 @@ function ShopDetails(props) {
                                                             }
                                                         </select>
                                                     </div>
-                                                    <div className="col-md-4 col-6 mb-3">
-                                                        <label className="mb-2 d-block">Quantity</label>
-                                                        <div className="input-group mb-3" style={{ width: 170 }}>
-                                                            <button className="btn btn-white border border-secondary px-3" type="button" id="button-addon1" data-mdb-ripple-color="dark">
-                                                                <i className="fas fa-minus" />
-                                                            </button>
-                                                            <input type="text" className="form-control text-center border border-secondary" placeholder={14} aria-label="Example text with button addon" aria-describedby="button-addon1" />
-                                                            <button className="btn btn-white border border-secondary px-3" type="button" id="button-addon2" data-mdb-ripple-color="dark">
-                                                                <i className="fas fa-plus" />
-                                                            </button>
-                                                        </div>
-                                                    </div>
                                                 </div>
                                                 <button className="btn btn-primary shadow-0" style={{ marginRight: 8 }} onClick={() => handleAddToCart(value)}> <i className="me-1 fa fa-shopping-basket" /> Add to cart </button>
-                                                <NavLink className="btn btn-warning shadow-0" style={{ marginRight: 8 }} onClick={() => handleAddToFav(value)} >  <i className="me-1 fa fa-heart fa-lg" /> Add to wishlist </NavLink>
+                                                <NavLink className="btn btn-warning shadow-0" style={{ marginRight: 8 }} onClick={() => addToFavourite(value.id)}>
+                                                    <i className="me-1 fa fa-heart fa-lg" /> {isAlreadyFavourite ? 'Remove from Wishlist' : 'Add to Wishlist'}
+                                                </NavLink>
                                             </div>
                                         </main>
                                     </div>

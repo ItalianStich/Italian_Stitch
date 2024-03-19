@@ -6,7 +6,6 @@ import { getCategory } from '../../redux/slice/category.slice';
 import { getSubcategory } from '../../redux/slice/Subcategory.slice'
 import { Link } from 'react-router-dom';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Badge from '@mui/material/Badge';
 import CartIcon from '@mui/icons-material/ShoppingCart';
 import { Box } from '@mui/system';
@@ -14,7 +13,6 @@ import { Dialog, DialogContent, DialogContentText, DialogTitle, DialogActions, I
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { Logout, Settings } from '@mui/icons-material';
 import { logoutRequest } from '../../redux/action/auth.action';
-import Button from '../../UI/button/Button';
 
 
 function Header(props) {
@@ -25,6 +23,7 @@ function Header(props) {
     const category = useSelector((state => state.category));
     const subcategory = useSelector((state => state.subcategory));
     const checklogin = useSelector((state => state.auth.user));
+    const favouriteState = useSelector((state => state.favourites));
 
     const cartState = useSelector(state => state.cart);
     let addedCartData = 0;
@@ -172,7 +171,7 @@ function Header(props) {
                                         </Badge>
                                     </Link>
                                     <Link to='/wishlist' style={{ paddingRight: '0px' }} >
-                                        <Badge className='ms-3' badgeContent={1} color="success">
+                                        <Badge className='ms-3' badgeContent={favouriteState.favItmes.length} color="success">
                                             <FavoriteIcon sx={{ color: '#2c4964', fontSize: '20px' }} />
                                         </Badge>
                                     </Link>
@@ -252,36 +251,9 @@ function Header(props) {
                                 <span />
                             </div>
                         </div>
-                        {/* <div className="header-item item-right">
-                       
-                        <NavLink to={'/cart'}>
-                            <ShoppingCartIcon />
-                        </NavLink>
-                        <NavLink to={'/favourite'}>
-                            <FavoriteIcon />
-                        </NavLink>
-                        <NavLink to={'/authentication'}>
-                            <AccountCircleIcon />
-                        </NavLink>
-                        
-                    </div> */}
                     </div>
                 </div>
             </header>
-            {/* <Dialog
-                open={openLogoutModal}
-                onClose={() => closeLogoutAlert()}
-                aria-labelledby="alert-dialog-title"
-                aria-describedby="alert-dialog-description">
-                <DialogTitle variant='h4' className="text-center pt-5 px-5 pb-2" id="alert-dialog-title" sx={{ fontWeight: '700' }}>Are you sure?</DialogTitle>
-                <DialogContent className="pt-0 px-5 pb-5">
-                    <DialogContentText id="alert-dialog-description" className='text-center'>Hello, are you sure you want to logout your account? Remember that once your account is logged out you will not be able to access some pages.</DialogContentText>
-                </DialogContent>
-                <DialogActions className="justify-content-center pt-0 py-5 pb-5">
-                    <Button onClick={() => closeLogoutAlert()}>Close</Button>
-                    <Button onClick={() => { handleLogout(); closeLogoutAlert() }} classes={'ms-4'}>Logout</Button>
-                </DialogActions>
-            </Dialog> */}
         </div>
     );
 }

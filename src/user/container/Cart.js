@@ -3,8 +3,6 @@ import { NavLink } from 'react-router-dom';
 import { getProduct } from '../redux/slice/Product.slice';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from '../UI/button/Button';
-import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove';
 import { decrementQuantity, incrementQuantity, removeItemFromCart } from '../redux/action/cart.action';
 import { setAlert } from '../redux/slice/Alert.slice';
 import CloseIcon from '@mui/icons-material/Close';
@@ -43,12 +41,11 @@ function Cart(props) {
     return (
         <div className="untree_co-section1">
             <TitleBox
-                    titleText='Your Carts'
-                    subTitleText={[
-                        'Welcome to cart. You can see here your cart product. Thank you !!!'
-                    ]} />
+                titleText='Your Carts'
+                subTitleText={[
+                    'Welcome to cart. You can see here your cart product. Thank you !!!'
+                ]} />
             <div className="container">
-                
                 <div className="row mb-5">
                     <form className="col-md-12" method="post">
                         <div className="site-blocks-table">
@@ -64,35 +61,34 @@ function Cart(props) {
                                     </tr>
                                 </thead>
                                 <tbody>
-
-                                    {
-                                        productToCart.map((item) => {
-                                            return (
-                                                <tr>
-                                                    <td className="product-thumbnail">
-                                                        <img src={item.prec} alt="Image" className="img-fluid" />
-                                                    </td>
-                                                    <td className="product-name">
-                                                        <h2 className="h5 text-black">{item.name}</h2>
-                                                    </td>
-                                                    <td>₹ {item.price}.00</td>
-                                                    <td>
-                                                        <div className="input-group mb-3 d-flex align-items-center quantity-container" style={{ maxWidth: 120 }}>
-                                                            <div className="input-group-prepend">
-                                                                <button className="btn1 btn-outline-black decrease" type="button" onClick={() => quantityDecrement(item.pid)}>−</button>
-                                                            </div>
-                                                            <input type="text" className="form-control text-center quantity-amount" placeholder={item.quantity} />
-                                                            <div className="input-group-append">
-                                                                <button className="btn1 btn-outline-black increase" type="button" onClick={() => quantityIncrement(item.pid)}>+</button>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td>₹ {item.quantity * item.price}</td>
-                                                    <td><Button onClick={() => removeFromCart(item.pid)} classes='p-0 bg-transparent'><CloseIcon sx={{ color: 'gray' }} /></Button></td>
-                                                </tr>
-                                            )
-                                        })
-                                    }
+                                    {productToCart.map((item) => (
+                                        <tr key={item.id}>
+                                            <td className="product-thumbnail">
+                                                <img src={item.prec} alt="Product" className="img-fluid" />
+                                            </td>
+                                            <td className="product-name">
+                                                <h2 className="h5 text-black">{item.name}</h2>
+                                            </td>
+                                            <td>₹ {item.price}.00</td>
+                                            <td>
+                                                <div className="input-group mb-3 d-flex align-items-center quantity-container" style={{ maxWidth: 120 }}>
+                                                    <div className="input-group-prepend">
+                                                        <button className="btn1 btn-outline-black decrease" type="button" onClick={() => quantityDecrement(item.pid)}>−</button>
+                                                    </div>
+                                                    <input type="text" className="form-control text-center quantity-amount" placeholder={item.quantity} />
+                                                    <div className="input-group-append">
+                                                        <button className="btn1 btn-outline-black increase" type="button" onClick={() => quantityIncrement(item.pid)}>+</button>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>₹ {item.quantity * item.price}</td>
+                                            <td>
+                                                <Button onClick={() => removeFromCart(item.pid)} classes='p-0 bg-transparent'>
+                                                    <CloseIcon sx={{ color: 'gray' }} />
+                                                </Button>
+                                            </td>
+                                        </tr>
+                                    ))}
                                 </tbody>
                             </table>
                         </div>
@@ -136,8 +132,9 @@ function Cart(props) {
                                 </div>
                                 <div className="row">
                                     <div className="col-md-12">
-                                        {/* <button className="btn1 btn-black btn-lg py-3 btn-block" onclick="window.location='checkout.html'">Proceed To Checkout</button> */}
-                                        <NavLink to={"/checkout"}><button className="btn2 btn2-primary"> Proceed  to Checkout</button></NavLink>
+                                        <NavLink to={"/checkout"}>
+                                            <button className="btn2 btn2-primary"> Proceed  to Checkout</button>
+                                        </NavLink>
                                     </div>
                                 </div>
                             </div>
@@ -146,7 +143,6 @@ function Cart(props) {
                 </div>
             </div>
         </div>
-
     );
 }
 
