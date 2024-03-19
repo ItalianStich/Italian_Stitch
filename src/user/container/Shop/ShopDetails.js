@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { addToCart } from '../../redux/action/cart.action';
 import { setAlert } from '../../redux/slice/Alert.slice';
+import { addOnStoreAndAPI } from '../../redux/action/favourite.action';
 
 function ShopDetails(props) {
     const { id } = useParams();
@@ -19,6 +20,11 @@ function ShopDetails(props) {
         dispatch(setAlert({ text: data.name + ' is successfully added in cart', color: 'success' }))
         dispatch(addToCart(id));
     };
+
+    const handleAddToFav = (data) => {
+        dispatch(setAlert({ text: data.name + ' is successfully added in favourite', color: 'success' }))
+        dispatch(addOnStoreAndAPI(data));
+    }
     
     return (
         <div>
@@ -100,7 +106,7 @@ function ShopDetails(props) {
                                                     </div>
                                                 </div>
                                                 <button className="btn btn-primary shadow-0" style={{ marginRight: 8 }} onClick={() => handleAddToCart(value)}> <i className="me-1 fa fa-shopping-basket" /> Add to cart </button>
-                                                <NavLink className="btn btn-warning shadow-0" style={{ marginRight: 8 }}>  <i className="me-1 fa fa-heart fa-lg" /> Add to wishlist </NavLink>
+                                                <NavLink className="btn btn-warning shadow-0" style={{ marginRight: 8 }} onClick={() => handleAddToFav(value)} >  <i className="me-1 fa fa-heart fa-lg" /> Add to wishlist </NavLink>
                                             </div>
                                         </main>
                                     </div>

@@ -85,10 +85,10 @@ function Lay_out({ children }) {
                 <div className="top">
                     <i className="uil uil-bars sidebar-toggle" onClick={() => handleToggleSwitch()} />
                     <div className="search-box">
-                        <i class="fa-solid fa-magnifying-glass" style={{ fontSize: "20px" }}></i>
+                        <i className="fa-solid fa-magnifying-glass" style={{ fontSize: "20px" }}></i>
                         <input type="search" placeholder="Search here..." />
                     </div>
-                    <img src="" alt />
+                    <img src="" alt="" />
                 </div>
                 {children}
             </section>

@@ -171,7 +171,7 @@ function Header(props) {
                                             <CartIcon sx={{ color: '#2c4964', fontSize: '20px' }} />
                                         </Badge>
                                     </Link>
-                                    <Link to='/favourite' style={{ paddingRight: '0px' }} >
+                                    <Link to='/wishlist' style={{ paddingRight: '0px' }} >
                                         <Badge className='ms-3' badgeContent={1} color="success">
                                             <FavoriteIcon sx={{ color: '#2c4964', fontSize: '20px' }} />
                                         </Badge>

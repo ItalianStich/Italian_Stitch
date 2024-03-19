@@ -1,4 +1,4 @@
-$(document).ready(function() {
+(document).ready(function() {
     var slider = $("#slider");
     var thumb = $("#thumb");
     var slidesPerPage = 4; //globaly define number of elements per page
