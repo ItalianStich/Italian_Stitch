@@ -1,14 +1,9 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { addToCart } from '../redux/action/cart.action';
-import { setAlert } from '../redux/slice/Alert.slice';
+import { useSelector } from 'react-redux';
 import TitleBox from '../UI/titlePart/TitleBox';
-import CartIcon from '@mui/icons-material/ShoppingCart';
-import { Link } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 
 function Favourite() {
-    const dispatch = useDispatch();
     const ProductData = useSelector((state) => state.product);
     const favouriteState = useSelector(state => state.favourites);
 
@@ -21,12 +16,6 @@ function Favourite() {
             return { id: item.fid };
         }
     });
-
-    const handleCart = (id) => {
-        let addedCartItem = ProductData.product.find((val) => val.id === id)
-        dispatch(setAlert({ text: addedCartItem.name + ' is successfully added in cart', color: 'success' }))
-        dispatch(addToCart(id))
-    }
 
     return (
         <>
@@ -55,9 +44,6 @@ function Favourite() {
                                         </div>
                                         <div className="product-details">
                                             <span className="product-catagory">{item.name} </span>
-                                            {/* <Link onClick={() => handleCart(item.id)} style={{ marginLeft: '168px' }}>
-                                            <CartIcon sx={{ color: '#2c4964', fontSize: '23px' }} />
-                                        </Link> */}
 
                                             {item.desc && (
                                                 <p>{`${item.desc.substring(0, 25)}...`}</p>

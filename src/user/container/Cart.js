@@ -98,10 +98,12 @@ function Cart(props) {
                     <div className="col-md-6">
                         <div className="row mb-5">
                             <div className="col-md-6">
-                                <button className="btn2 btn2-primary"> Continue Shopping </button>
+                                <NavLink to={"/shop"} >
+                                    <button className="btn2 btn2-primary"> Continue Shopping </button>
+                                </NavLink>
                             </div>
                         </div>
-                        <div className="row">
+                        {/* <div className="row">
                             <div className="col-md-12">
                                 <label className="text-black h4" htmlFor="coupon">Coupon</label>
                                 <p>Enter your coupon code if you have one.</p>
@@ -112,7 +114,7 @@ function Cart(props) {
                             <div className="col-md-6" style={{ paddingTop: '10px' }}>
                                 <button className="btn2 btn2-primary"> Apply Coupon </button>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                     <div className="col-md-6 pl-5">
                         <div className="row justify-content-end">
