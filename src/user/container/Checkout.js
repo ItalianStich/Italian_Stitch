@@ -38,39 +38,80 @@ function Checkout(props) {
     const dispatch = useDispatch();
 
     const authentication = useSelector((state => state.auth.user));
-    const product = useSelector((state => state.product));
+    const productData = useSelector((state => state.product.product));
     const cartState = useSelector((state => state.cart));
 
-    // const productIds = cartState.items.map(item => item.pid);
-    // const quantities = cartState.items.map(item => item.quantity);
+    React.useEffect(() => {
+        dispatch(getProduct())
+    }, []);
+
+    let mediToCartData = cartState.items.map((cartItem) => {
+        let filterData = productData.find((medicine) => medicine.id === cartItem.pid);
+        return { ...filterData, ...cartItem }
+    })
+
+    let totleAmount = mediToCartData.reduce((acc, val) => acc + parseInt(val.price) * val.quantity, 0);
 
     const productMapData = cartState.items.map((value) => ({
         product_id: value.pid,
         cart_quantity: value.quantity
-    }))
+    }));
 
-    const handlePlaceOrder = (addressValues) => {
+    const orderTotal = cartState.items.reduce((total, item) => {
+        const product = productData.find(product => item.pid === product.id);
+        let shippingCharge = 0;
+
+        if (product.weight <= 0.5) {
+            shippingCharge = 64;
+        } else if (product.weight > 0.5 && product.weight <= 4) {
+            const additionalWeight = product.weight - 0.5;
+            shippingCharge = ((additionalWeight / 0.5) * 61) + 64;
+        } else if (product.weight > 4 && product.weight <= 5) {
+            shippingCharge = 302;
+        } else if (product.weight > 5 && product.weight <= 9) {
+            const additionalWeight = product.weight - 5;
+            shippingCharge = 302 + (additionalWeight * 41);
+        } else if (product.weight > 9 && product.weight <= 10) {
+            shippingCharge = 419;
+        } else if (product.weight > 10) {
+            const additionalWeight = product.weight - 10;
+            shippingCharge = 419 + (additionalWeight * 42);
+        }
+
+        let tax = parseFloat(product.price * (product.weight / 100)) * item.quantity;
+        let shippingCharges = parseFloat(shippingCharge * item.quantity);
+        let totalOrder = (product.price * item.quantity) + (item.quantity * shippingCharge) + tax;
+
+        total.tax += tax;
+        total.shippingCharges += shippingCharges;
+        total.orderTotal += totalOrder;
+
+        return total;
+    }, { orderTotal: 0, shippingCharges: 0, tax: 0 });
+
+    const handlePlaceOrder = async (addressValues) => {
         let dataObj = {
             address: [addressValues],
             user_id: authentication.uid,
-            items: productMapData
+            items: productMapData,
+            TotalAmount: orderTotal.orderTotal,
+            Tax: orderTotal.tax,
+            Shipping_Charge: orderTotal.shippingCharges
         }
-        dispatch(addOrder(dataObj))
+        try {
+            await dispatch(addOrder(dataObj));
+            dispatch(setAlert({ text: 'Your order has been confirmed successfully!', color: 'success' }));
+            // navigate('/payment');
+        } catch (error) {
+            console.error('Error sending message:', error);
+            dispatch(setAlert({ text: 'An error occurred while processing your order. Please try again later.', color: 'error' }));
+        }
     }
 
     const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
         validationSchema: CheckoutSchema,
         initialValues: initialValues,
         onSubmit: async (values, { resetForm }) => {
-            // try {
-            //     // dispatch(addOrder(values));
-            //     dispatch(setAlert({ text: 'Your order has been confirmed successfully!', color: 'success' }));
-            //     resetForm();
-            //     navigate('/payment');
-            // } catch (error) {
-            //     console.error('Error sending message:', error);
-            //     dispatch(setAlert({ text: 'An error occurred while processing your order. Please try again later.', color: 'error' }));
-            // }
             handlePlaceOrder(values)
         }
     });
@@ -160,7 +201,6 @@ function Checkout(props) {
                                     </div>
                                 </div>
 
-
                             </form>
                         </div>
                     </div>
@@ -190,21 +230,31 @@ function Checkout(props) {
                                                 <th>Total</th>
                                             </tr></thead>
                                         <tbody>
-                                            <tr>
-                                                <td>Top Up T-Shirt <strong className="mx-2">x</strong> 1</td>
-                                                <td>$250.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Polo Shirt <strong className="mx-2">x</strong>   1</td>
-                                                <td>$100.00</td>
-                                            </tr>
+                                            {cartState.items.map((item, index) => {
+                                                const product = productData.find(product => product.id === item.pid);
+                                                const productName = product ? product.name : 'Product Name Not Found';
+                                                return (
+                                                    <tr key={index}>
+                                                        <td>{productName} <strong className="mx-2">x</strong> {item.quantity}</td>
+                                                        <td>₹ {(product ? product.price : 0) * item.quantity}</td>
+                                                    </tr>
+                                                );
+                                            })}
                                             <tr>
                                                 <td className="text-black font-weight-bold"><strong>Cart Subtotal</strong></td>
-                                                <td className="text-black">$350.00</td>
+                                                <td className="text-black">₹ {totleAmount}</td>
+                                            </tr>
+                                            <tr>
+                                                <td className="text-black font-weight-bold"><strong>Tax</strong></td>
+                                                <td className="text-black">₹ {orderTotal.tax.toFixed(2)}</td>
+                                            </tr>
+                                            <tr>
+                                                <td className="text-black font-weight-bold"><strong>Shipping Charges</strong></td>
+                                                <td className="text-black">₹ {orderTotal.shippingCharges.toFixed(2)}</td>
                                             </tr>
                                             <tr>
                                                 <td className="text-black font-weight-bold"><strong>Order Total</strong></td>
-                                                <td className="text-black font-weight-bold"><strong>$350.00</strong></td>
+                                                <td className="text-black font-weight-bold"><strong>₹ {orderTotal.orderTotal}</strong></td>
                                             </tr>
                                         </tbody>
                                     </table>
