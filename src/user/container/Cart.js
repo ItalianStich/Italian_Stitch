@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { getProduct } from '../redux/slice/Product.slice';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,32 +10,53 @@ import TitleBox from '../UI/titlePart/TitleBox';
 
 function Cart(props) {
     const dispatch = useDispatch();
-
     const product = useSelector((state) => state.product);
     const cartState = useSelector((state) => state.cart);
+    const [quantity, setQuantity] = useState({}); // Initialize quantity state
 
     useEffect(() => {
         dispatch(getProduct())
     }, [dispatch]);
+
+    useEffect(() => {
+        // Initialize quantity state with quantities from cartState
+        const initialQuantityState = {};
+        cartState.items.forEach(item => {
+            initialQuantityState[item.pid] = item.quantity;
+        });
+        setQuantity(initialQuantityState);
+    }, [cartState.items]);
 
     let productToCart = cartState.items.map((cartItem) => {
         let filterData = product.product.find((medicine) => medicine.id === cartItem.pid);
         return { ...filterData, ...cartItem }
     })
 
-    let totleAmount = productToCart.reduce((acc, val) => acc + parseInt(val.price) * val.quantity, 0);
+    const calculateTotalAmount = () => {
+        let tempTotal = productToCart.reduce((acc, val) => acc + parseInt(val.price) * quantity[val.pid], 0);
+        return tempTotal;
+    }
 
     const quantityDecrement = (id) => {
-        dispatch(decrementQuantity(id))
+        dispatch(decrementQuantity(id));
+        setQuantity(prevState => ({ ...prevState, [id]: prevState[id] - 1 }));
     }
+
     const quantityIncrement = (id) => {
-        dispatch(incrementQuantity(id))
+        dispatch(incrementQuantity(id));
+        setQuantity(prevState => ({ ...prevState, [id]: prevState[id] + 1 }));
     }
 
     const removeFromCart = (id) => {
         let addedCartItem = product.product.find((val) => val.id === id)
         dispatch(setAlert({ text: addedCartItem.name + ' is successfully removed from cart', color: 'success' }))
         dispatch(removeItemFromCart(id));
+        // Remove quantity from local state
+        setQuantity(prevState => {
+            const newState = { ...prevState };
+            delete newState[id];
+            return newState;
+        });
     }
 
     return (
@@ -103,18 +124,6 @@ function Cart(props) {
                                 </NavLink>
                             </div>
                         </div>
-                        {/* <div className="row">
-                            <div className="col-md-12">
-                                <label className="text-black h4" htmlFor="coupon">Coupon</label>
-                                <p>Enter your coupon code if you have one.</p>
-                            </div>
-                            <div className="col-md-8 mb-3 mb-md-0">
-                                <input type="text" className="form-control py-3" id="coupon" placeholder="Coupon Code" />
-                            </div>
-                            <div className="col-md-6" style={{ paddingTop: '10px' }}>
-                                <button className="btn2 btn2-primary"> Apply Coupon </button>
-                            </div>
-                        </div> */}
                     </div>
                     <div className="col-md-6 pl-5">
                         <div className="row justify-content-end">
@@ -129,13 +138,13 @@ function Cart(props) {
                                         <span className="text-black">Total</span>
                                     </div>
                                     <div className="col-md-6 text-right">
-                                        <strong className="text-black">₹ {totleAmount}</strong>
+                                        <strong className="text-black">₹ {calculateTotalAmount()}</strong>
                                     </div>
                                 </div>
                                 <div className="row">
                                     <div className="col-md-12">
                                         <NavLink to={"/checkout"}>
-                                            <button className="btn2 btn2-primary"> Proceed  to Checkout</button>
+                                            <button className="btn2 btn2-primary"> Proceed to Checkout</button>
                                         </NavLink>
                                     </div>
                                 </div>

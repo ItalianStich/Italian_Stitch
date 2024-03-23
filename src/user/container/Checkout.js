@@ -59,23 +59,29 @@ function Checkout(props) {
 
     const orderTotal = cartState.items.reduce((total, item) => {
         const product = productData.find(product => item.pid === product.id);
+
+        if (!product || !product.price || !product.weight) {
+            dispatch(setAlert({ text: 'Invalid product data. Please try again later.', color: 'error' }));
+            return total;
+        }
+
         let shippingCharge = 0;
 
         if (product.weight <= 0.5) {
-            shippingCharge = 64;
+            shippingCharge = Math.min(50, 1100 - total.shippingCharges); // Limit to remaining amount up to ₹1100
         } else if (product.weight > 0.5 && product.weight <= 4) {
             const additionalWeight = product.weight - 0.5;
-            shippingCharge = ((additionalWeight / 0.5) * 61) + 64;
+            shippingCharge = Math.min(((additionalWeight / 0.5) * 42) + 50, 1100 - total.shippingCharges); // Limit to remaining amount up to ₹1100
         } else if (product.weight > 4 && product.weight <= 5) {
-            shippingCharge = 302;
+            shippingCharge = Math.min(70, 1100 - total.shippingCharges); // Limit to remaining amount up to ₹1100
         } else if (product.weight > 5 && product.weight <= 9) {
             const additionalWeight = product.weight - 5;
-            shippingCharge = 302 + (additionalWeight * 41);
+            shippingCharge = Math.min(70 + (additionalWeight * 35), 1100 - total.shippingCharges); // Limit to remaining amount up to ₹1100
         } else if (product.weight > 9 && product.weight <= 10) {
-            shippingCharge = 419;
+            shippingCharge = Math.min(125, 1100 - total.shippingCharges); // Limit to remaining amount up to ₹1100
         } else if (product.weight > 10) {
             const additionalWeight = product.weight - 10;
-            shippingCharge = 419 + (additionalWeight * 42);
+            shippingCharge = Math.min(125 + (additionalWeight * 42), 1100 - total.shippingCharges); // Limit to remaining amount up to ₹1100
         }
 
         let tax = parseFloat(product.price * (product.weight / 100)) * item.quantity;

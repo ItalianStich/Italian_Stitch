@@ -391,7 +391,7 @@ function ProductForm({ onHandleSubmit, updateData }) {
 
                             <div className="col-6 mb-3">
                                 <label className="form-label" htmlFor="ecommerce-product-Weight">Item Weight</label>
-                                <input type="text" className="form-control" id="ecommerce-product-name" placeholder="E.X 400 g" aria-label="weight" name="weight"
+                                <input type="text" className="form-control" id="ecommerce-product-name" placeholder="E.X 400" aria-label="weight" name="weight"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     value={values.weight}
