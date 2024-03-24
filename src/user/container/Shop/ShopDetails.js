@@ -6,33 +6,49 @@ import { NavLink } from 'react-router-dom';
 import { addToCart, incrementQuantity, decrementQuantity } from '../../redux/action/cart.action';
 import { setAlert } from '../../redux/slice/Alert.slice';
 import { addOnStoreAndAPI, removeOnStoreAndAPI } from '../../redux/action/favourite.action';
-
+import { addReview, getReview } from '../../redux/slice/Review.slice';
 
 function ShopDetails(props) {
     const { id } = useParams();
     const dispatch = useDispatch();
     const [isAlreadyFavourite, setIsAlreadyFavourite] = React.useState(false);
     const [quantity, setQuantity] = React.useState(1);
-
     const product = useSelector((state => state.product));
     const favouriteState = useSelector((state => state.favourites));
+    const reviews = useSelector(state => state.reviews);
+    const [reviewData, setReviewData] = React.useState({
+        rating: 5,
+        comment: ''
+    });
 
     React.useEffect(() => {
         dispatch(getProduct())
-    }, [id]);
+        dispatch(getReview())
+    }, [id, dispatch]);
 
     React.useEffect(() => {
         setIsAlreadyFavourite(favouriteState.favItmes.some(item => item.fid === id));
     }, [favouriteState, id]);
 
-    // const quantityDecrement = (id) => {
-    //     dispatch(decrementQuantity(id));
-    //     setQuantity(quantity - 1);
-    // }
-    // const quantityIncrement = (id) => {
-    //     dispatch(incrementQuantity(id));
-    //     setQuantity(quantity + 1);
-    // }
+    const handleAddReview = (e) => {
+        e.preventDefault();
+        dispatch(addReview({ productId: id, reviewData }));
+        setReviewData({ rating: 5, comment: '' });
+    };
+
+    const handleChangeRating = (newRating) => {
+        setReviewData(prevState => ({
+            ...prevState,
+            rating: newRating
+        }));
+    };
+
+    const handleChangeComment = (e) => {
+        setReviewData(prevState => ({
+            ...prevState,
+            comment: e.target.value
+        }));
+    };
 
     const handleAddToCart = (data) => {
         dispatch(setAlert({ text: data.name + ' is successfully added in cart', color: 'success' }))
@@ -55,7 +71,6 @@ function ShopDetails(props) {
         <div>
             <section className="py-5">
                 <div className="container">
-
                     {
                         product.product.map((value) => {
                             if (value.id === id) {
@@ -64,7 +79,7 @@ function ShopDetails(props) {
                                         <aside className="col-lg-6">
                                             <div className="border rounded-4 mb-3 d-flex justify-content-center">
                                                 <NavLink className="rounded-4" data-type="image">
-                                                    <img style={{ maxWidth: '100%', maxHeight: '100vh', margin: 'auto' }} className="rounded-4 fit" src={value.prec} />
+                                                    <img style={{ maxWidth: '100%', maxHeight: '100vh', margin: 'auto' }} className="rounded-4 fit" src={value.prec} alt={value.name} />
                                                 </NavLink>
                                             </div>
                                         </aside>
@@ -72,8 +87,6 @@ function ShopDetails(props) {
                                             <div className="ps-lg-3">
                                                 <h4 className="title text-dark"> {value.name} </h4>
                                                 <p>{value.desc}</p>
-
-
                                                 <div className="mb-3">
                                                     <span className="h5">₹ {value.price} </span>
                                                     <span className="line-through">₹ {value.mrp} </span>
@@ -81,14 +94,10 @@ function ShopDetails(props) {
                                                 </div>
                                                 <div className="d-flex flex-row my-3">
                                                     <div className="text-warning mb-1 me-2">
-                                                        <i className="fa fa-star" />
-                                                        <i className="fa fa-star" />
-                                                        <i className="fa fa-star" />
-                                                        <i className="fa fa-star" />
-                                                        <i className="fas fa-star-half-alt" />
-                                                        <span className="ms-1">
-                                                            4.5
-                                                        </span>
+                                                        {/* Star ratings */}
+                                                        {Array.from({ length: 5 }).map((_, index) => (
+                                                            <i key={index} className={`fa fa-star${index < value.rating ? '' : '-o'}`} />
+                                                        ))}
                                                     </div>
                                                     <div style={{ color: 'black' }}>Availability: </div><span className="text-success ms-2">
                                                         {
@@ -132,8 +141,48 @@ function ShopDetails(props) {
                     }
                 </div>
             </section>
+            <div className="container">
+                <h2>Product Reviews</h2>
+                <div className="reviews-container">
+                    {reviews && reviews.map(review => (
+                        <div className="review-item" key={review.id}>
+                            <div className="review-rating">
+                                {/* Star ratings */}
+                                {Array.from({ length: 5 }).map((_, index) => (
+                                    <i key={index} className={`fa fa-star${index < review.rating ? '' : '-o'}`} />
+                                ))}
+                            </div>
+                            <div className="review-comment">{review.comment}</div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+
+            <div className="container">
+                <h2>Add a Review</h2>
+                <form onSubmit={handleAddReview}>
+                    <div className="form-group">
+                        <label>Rating:</label>
+                        <div className="rating-stars">
+                            {[...Array(5)].map((_, index) => (
+                                <i
+                                    key={index}
+                                    className={`fa fa-star${index < reviewData.rating ? '' : '-o'}`}
+                                    onClick={() => setReviewData(prevState => ({ ...prevState, rating: index + 1 }))}
+                                />
+                            ))}
+                        </div>
+                    </div>
+                    <div className="form-group">
+                        <label>Comment:</label>
+                        <textarea value={reviewData.comment} onChange={handleChangeComment} className="form-control" />
+                    </div>
+                    <button type="submit" className="btn btn-primary">Submit Review</button>
+                </form>
+            </div>
         </div>
     );
 }
 
 export default ShopDetails;
+

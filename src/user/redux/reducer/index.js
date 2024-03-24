@@ -9,6 +9,7 @@ import userInfoSlice from "../slice/UserInfoSlice";
 import categorySlice from "../slice/category.slice";
 import productSlice from "../slice/Product.slice";
 import contactSlice from "../slice/Contact.slice";
+import reviewsSlice from "../slice/Review.slice";
 
 export const rootReducer = combineReducers({
     auth: authReducer,
@@ -20,5 +21,6 @@ export const rootReducer = combineReducers({
     favourites: favouriteReducer,
     order: OrderSlice,
     userInfo: userInfoSlice,
-    contact: contactSlice
+    contact: contactSlice,
+    reviews: reviewsSlice
 })  
