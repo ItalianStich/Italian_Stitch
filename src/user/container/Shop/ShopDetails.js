@@ -17,8 +17,9 @@ function ShopDetails(props) {
     const favouriteState = useSelector((state => state.favourites));
     const reviews = useSelector(state => state.reviews);
     const [reviewData, setReviewData] = React.useState({
-        rating: 5,
-        comment: ''
+        rating: 0,
+        comment: '',
+        email: ''
     });
 
     React.useEffect(() => {
@@ -32,21 +33,27 @@ function ShopDetails(props) {
 
     const handleAddReview = (e) => {
         e.preventDefault();
+        if (!reviewData.rating || !reviewData.comment || !reviewData.email) {
+            dispatch(setAlert({ text: 'Please fill in all the required fields.', color: 'error' })) // Display error message
+            return; // Exit the function if validation fails
+        }
         dispatch(addReview({ productId: id, reviewData }));
-        setReviewData({ rating: 5, comment: '' });
-    };
+        setReviewData(prevState => ({ ...prevState, comment: '', email: '' })); // Reset comment and email fields
 
-    const handleChangeRating = (newRating) => {
-        setReviewData(prevState => ({
-            ...prevState,
-            rating: newRating
-        }));
+        dispatch(setAlert({ text: 'Review submitted successfully.', color: 'success' }));
     };
 
     const handleChangeComment = (e) => {
         setReviewData(prevState => ({
             ...prevState,
             comment: e.target.value
+        }));
+    };
+
+    const handleChangeEmail = (e) => {
+        setReviewData(prevState => ({
+            ...prevState,
+            email: e.target.value
         }));
     };
 
@@ -93,12 +100,6 @@ function ShopDetails(props) {
                                                     <span className="text-muted" style={{ fontSize: '18px' }}> ({Math.round((value.mrp - value.price) * 100 / value.mrp)}% off)</span>
                                                 </div>
                                                 <div className="d-flex flex-row my-3">
-                                                    <div className="text-warning mb-1 me-2">
-                                                        {/* Star ratings */}
-                                                        {Array.from({ length: 5 }).map((_, index) => (
-                                                            <i key={index} className={`fa fa-star${index < value.rating ? '' : '-o'}`} />
-                                                        ))}
-                                                    </div>
                                                     <div style={{ color: 'black' }}>Availability: </div><span className="text-success ms-2">
                                                         {
                                                             value.sizesAndStocks.some(sizeOption => sizeOption.stock > 0) ? <span>In Stock</span> : <span>Out of Stock</span>
@@ -141,8 +142,8 @@ function ShopDetails(props) {
                     }
                 </div>
             </section>
+            <hr style={{ width: '80%', marginLeft: '10%' }} />
             <div className="container">
-                <h2>Product Reviews</h2>
                 <div className="reviews-container">
                     {reviews && reviews.map(review => (
                         <div className="review-item" key={review.id}>
@@ -159,11 +160,13 @@ function ShopDetails(props) {
             </div>
 
             <div className="container">
-                <h2>Add a Review</h2>
-                <form onSubmit={handleAddReview}>
+                <form onSubmit={handleAddReview} style={{ textAlign: 'center' }}>
                     <div className="form-group">
-                        <label>Rating:</label>
-                        <div className="rating-stars">
+                        <h6 className="review-h6" style={{ marginLeft: '-437px' }}>Your Review is matter.</h6>
+                        <h6 className="review-h6" style={{ marginBottom: '15px' }}>Have you used this product before?</h6>
+
+                        <div className="rating-stars" style={{ color: '#f2b600', marginLeft: '-315px' }}>
+                            <label className="form-label" style={{ marginLeft: '-80px', marginRight: '15px' }}>Rating</label>
                             {[...Array(5)].map((_, index) => (
                                 <i
                                     key={index}
@@ -173,14 +176,29 @@ function ShopDetails(props) {
                             ))}
                         </div>
                     </div>
-                    <div className="form-group">
-                        <label>Comment:</label>
-                        <textarea value={reviewData.comment} onChange={handleChangeComment} className="form-control" />
+
+                    <div className="col-12 mb-3 form_field position-relative">
+                        <label htmlFor="c_email_address" className="form-label" style={{ paddingTop: 10, marginLeft: '-500px' }}>Email Address</label>
+                        <input style={{ width: '55%', marginLeft: '23%' }} type="email" className="form-control" id="c_email_address" name="c_email_address"
+                            value={reviewData.email}
+                            onChange={handleChangeEmail}
+                        />
                     </div>
-                    <button type="submit" className="btn btn-primary">Submit Review</button>
+
+                    <label className="form-label" style={{ marginLeft: '-500px' }}>Description</label>
+                    <div className="col-12 mb-3 form_field position-relative">
+
+                        <textarea style={{ width: '55%' }} rows={"5"} cols={"60"} className='m-0' margin="dense" id="desc" label="Description" type="text" fullWidth multiline name='desc' variant="standard"
+                            onChange={handleChangeComment}
+                            value={reviewData.comment}
+                        />
+                    </div>
+                    <button type="submit" className="btn btn-primary" style={{ marginLeft: '-440px' }}>Submit Review</button>
                 </form>
-            </div>
-        </div>
+            </div >
+
+
+        </div >
     );
 }
 

@@ -1627,3 +1627,9 @@ span.line-through {
 } */
 
 /* ********************************************************************* */
+
+.review-h6 {
+    font-size: 13px;
+    margin-bottom: 8px;
+    margin-left: -350px;
+  }
