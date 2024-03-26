@@ -59,17 +59,18 @@ function Lay_out({ children }) {
                             </NavLink>
                         </li>
                         <li>
+                            <NavLink to="/admin/order">
+                                <Inventory2OutlinedIcon style={{ marginRight: '18px', fontSize: '28px', color: '#707070' }} />
+                                <span className="link-name">Order</span>
+                            </NavLink>
+                        </li>
+                        <li>
                             <NavLink to="/admin/user-contact">
                                 <SupervisedUserCircleIcon style={{ marginRight: '18px', fontSize: '28px', color: '#707070' }} />
                                 <span className="link-name">User Contact</span>
                             </NavLink>
                         </li>
-                        {/* <li>
-                            <NavLink to="/admin/order">
-                                <Inventory2OutlinedIcon style={{ marginRight: '18px', fontSize: '28px', color: '#707070' }} />
-                                <span className="link-name">Order</span>
-                            </NavLink>
-                        </li> */}
+
                     </ul>
                     <ul className="logout-mode">
                         <li>
