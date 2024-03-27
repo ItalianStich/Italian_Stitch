@@ -39,6 +39,7 @@ function OrderDetails(props) {
     }
 
     return (
+
         // <section id='cart' className='section-p1'>
         //     <div>
         //         <table>
@@ -91,29 +92,96 @@ function OrderDetails(props) {
         //         </div>
         //     </div>
         // </section>
+        <>
 
-        <div className='mt-5'>
-            {
-                productData.map((item, index) => {
-                    return (
-                        <div className="product-card" key={item.id}>
-                            <div className="badge">Hot</div>
-                            <div className="product-tumb">
-                                <img src={item.prec} alt={item.alt} />
-                            </div>
-                            <div className="product-details">
-                                <span className="product-catagory">{item.name}</span>
-                                <p>{item.desc && typeof item.desc === 'string' ? `${item.desc.substring(0, 25)}` : ''}</p>
-                                <div className="product-bottom-details">
-                                    <div className="product-price">₹ {item.price} &nbsp; </div>
-                                    <div className="product-price1">₹ {item.mrp}</div>
+            <div className='mt-5'>
+                {
+                    productData.map((item, index) => {
+                        return (
+                            <div className="product-card" key={item.id}>
+                                <div className="badge">Hot</div>
+                                <div className="product-tumb">
+                                    <img src={item.prec} alt={item.alt} />
                                 </div>
+                                <div className="product-details">
+                                    <span className="product-catagory">{item.name}</span>
+                                    <p>{item.desc && typeof item.desc === 'string' ? `${item.desc.substring(0, 25)}` : ''}</p>
+                                    <div className="product-bottom-details">
+                                        <div className="product-price">₹ {item.price} &nbsp; </div>
+                                        <div className="product-price1">₹ {item.mrp}</div>
+                                    </div>
+                                </div>
+
+                                {/* {
+                                    index === 0 ? <select
+                                        value={selectedStatus}
+                                        onChange={(e) => { setSelectedStatus(e.target.value) }}
+                                    >
+                                        <option value="processing">Processing</option>
+                                        <option value="shipped">Shipped</option>
+                                        <option value="cancelled">Cancelled</option>
+                                    </select> : ''
+                                } */}
+                                <label style={{ paddingTop: '7px', paddingRight: '37px' }}>Category name:</label>
+                                {
+                                    index === 0 ?
+                                        <select
+                                            name="category_id"
+                                            id="category_id"
+                                            className="form-select"
+                                            onChange={(e) => { setSelectedStatus(e.target.value) }}
+                                            value={selectedStatus}
+                                        >
+                                            <option value='processing'>Processing</option>
+                                            <option value='shipped'>Shipped</option>
+                                            <option value='cancelled'>Cancelled</option>
+                                            
+                                        </select> : ''
+                                }
+
                             </div>
-                        </div>
-                    )
-                })
-            }
-        </div>
+
+                        )
+                    })
+                }
+            </div >
+
+            <br></br>
+
+            <hr></hr>
+            <div className='d-flex align-items-center justify-content-center'>
+                <h3 className='mb-0' style={{ color: 'gray' }}>User Information</h3>
+            </div>
+
+            <div className="product-card" style={{ width: '600px', marginLeft: '250px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.5)' }}>
+                {
+                    productData.map((value) => {
+                        const dataObj = value.address;
+                        if (dataObj && Array.isArray(dataObj)) { // Check if newww is an array
+                            return dataObj.map((addressItem, addressIndex) => {
+                                return (
+                                    <div className="product-details">
+                                        <span className="product-catagory" style={{ color: 'gray' }}>User Name: {addressItem.c_fname} {addressItem.c_lname}</span>
+                                        <p>Shipping Address: {addressItem.c_address} {addressItem.appartment} {addressItem.c_state_country} - {addressItem.c_postal_zip}</p>
+                                        <p>Mobile Number: {addressItem.c_phone}</p>
+                                    </div>
+                                )
+                            })
+
+                        }
+                    })
+                }
+                <div role='none'>
+                    <button id='prev' className='_1Pr1m wQxKC _2fXFm _2zWIL' style={{ backgroundColor: 'lightgrey', color: 'black' }} type='submit' aria-label='Submit' tabIndex={0}
+                        onClick={handleStatusChanged}
+                    >
+                        <span>
+                            <strong>Submit</strong>
+                        </span>
+                    </button>
+                </div>
+            </div >
+        </>
     )
 }
 
