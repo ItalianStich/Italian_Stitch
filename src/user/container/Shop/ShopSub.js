@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import { getProduct } from '../../redux/slice/Product.slice';
+import Loader from '../../UI/loader/Loader';
 
 function ShopSub(props) {
     const [filteredData, setFilteredData] = React.useState([]);
@@ -11,6 +12,7 @@ function ShopSub(props) {
     const dispatch = useDispatch();
 
     const product = useSelector((state => state.product.product));
+    const isLoading = useSelector((state) => state.product.loading || state.category.loading); 
 
     React.useEffect(() => {
         dispatch(getProduct());
@@ -20,7 +22,9 @@ function ShopSub(props) {
 
     return (
         <div>
-            {
+            {isLoading ? (
+                <Loader style={{ height: 'calc(100vh - 64px' }} />
+            ) : (
                 filteredData.map((item, index) => {
                     return (
                         <NavLink to={'/product_details/' + item.id} key={item.id} target="_blank">
@@ -42,7 +46,7 @@ function ShopSub(props) {
                         </NavLink>
                     )
                 })
-            }
+            )}
         </div>
     );
 }

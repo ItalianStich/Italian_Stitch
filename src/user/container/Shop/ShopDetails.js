@@ -11,11 +11,14 @@ import { addReview, getReview } from '../../redux/slice/Review.slice';
 function ShopDetails(props) {
     const { id } = useParams();
     const dispatch = useDispatch();
+    
     const [isAlreadyFavourite, setIsAlreadyFavourite] = React.useState(false);
     const [quantity, setQuantity] = React.useState(1);
+
     const product = useSelector((state => state.product));
     const favouriteState = useSelector((state => state.favourites));
     const reviews = useSelector(state => state.reviews);
+    
     const [reviewData, setReviewData] = React.useState({
         rating: 0,
         comment: '',

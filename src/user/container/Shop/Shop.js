@@ -3,12 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getProduct } from '../../redux/slice/Product.slice'
 import { getCategory } from '../../redux/slice/category.slice'
 import { NavLink } from 'react-router-dom';
+import Loader from '../../UI/loader/Loader';
 
 function Shop(props) {
     const dispatch = useDispatch();
 
     const category = useSelector((state => state.category.category));
     const product = useSelector((state => state.product.product));
+    const isLoading = useSelector((state) => state.product.loading || state.category.loading); 
 
     useEffect(() => {
         dispatch(getCategory())
@@ -17,7 +19,9 @@ function Shop(props) {
 
     return (
         <div>
-            {
+            {isLoading ? (
+                <Loader style={{ height: 'calc(100vh - 64px' }} />
+            ) : (
                 product.map((item, index) => (
                     <NavLink key={item.id} to={"/product_details/" + item.id}>
                         <div className="product-card">
@@ -38,7 +42,7 @@ function Shop(props) {
 
                     </NavLink>
                 ))
-            }
+            )}
         </div>
 
     );
