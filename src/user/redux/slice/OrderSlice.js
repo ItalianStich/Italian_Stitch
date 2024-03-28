@@ -10,12 +10,12 @@ const initState = {
 }
 
 const onLoading = (state, action) => {
-    state.isLoading = true;
+    state.loading = true;
     state.error = null;
 }
 
 const onError = (state, action) => {
-    state.isLoading = false;
+    state.loading = false;
     state.error = action.error.message;
 }
 export const getOrder = createAsyncThunk(

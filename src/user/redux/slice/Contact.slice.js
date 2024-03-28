@@ -9,12 +9,12 @@ let initState = {
 }
 
 const onLoading = (state, action) => {
-    state.isLoading = false;
+    state.loading = false;
     state.error = null;
 }
 
 const onError = (state, action) => {
-    state.isLoading = false;
+    state.loading = false;
     state.error = action.error.message;
 }
 
@@ -77,9 +77,14 @@ export const contactSlice = createSlice({
     initialState: initState,
     reducers: {},
     extraReducers: (builder) => {
-        builder.addCase(getContact.pending, onLoading);
+        builder.addCase(getContact.pending, (state, action) => {  // Change here
+            state.loading = true;
+            state.error = null;
+        });
         builder.addCase(getContact.fulfilled, (state, action) => {
             state.contact = action.payload;
+            state.loading = false;  // Change here
+            state.error = null;
         });
         builder.addCase(getContact.rejected, onError);
         builder.addCase(addNewContact.pending, onLoading);
@@ -90,7 +95,7 @@ export const contactSlice = createSlice({
 
         builder.addCase(deleteContact.pending, onLoading);
         builder.addCase(deleteContact.fulfilled, (state, action) => {
-            state.contact = state.contact.filter((v) => v.id!== action.payload);
+            state.contact = state.contact.filter((v) => v.id !== action.payload);
         });
     }
 });

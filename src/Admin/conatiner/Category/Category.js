@@ -8,6 +8,8 @@ import EditIcon from '@mui/icons-material/Edit';
 import IconButton from '@mui/material/IconButton';
 import { setAlert } from '../../../user/redux/slice/Alert.slice';
 import { addCategory, deleteCategory, getCategory, updateCategory } from '../../../user/redux/slice/category.slice';
+import Loader from '../../../user/UI/loader/Loader';
+import ErrorMsg from '../../../user/UI/errorMsg/ErrorMsg';
 
 function Category(props) {
     const [update, setUpdate] = useState(false)
@@ -60,21 +62,27 @@ function Category(props) {
     ];
 
     return (
-        <div>
-            <h2>Watch Category</h2>
-            <CategoryForm onHandleSubmit={handleSubmitForm} updateData={update} />
-            <div style={{ height: 400, width: '100%' }}>
-                <DataGrid
-                    rows={category.category}
-                    columns={columns}
-                    initialState={{
-                        pagination: {
-                            paginationModel: { page: 0, pageSize: 5 },
-                        },
-                    }}
-                    pageSizeOptions={[5, 10]}
-                />
-            </div>
+        <div className='data_table' style={{ height: 400, width: '100%' }}>
+            {category.loading ?
+                <Loader style={{ height: 'calc(100vh - 64px' }} /> :
+                category.error ?
+                    <ErrorMsg style={{ height: "calc(100vh - 64px" }} text={category.error} /> :
+                    <>
+                        <CategoryForm onHandleSubmit={handleSubmitForm} updateData={update} />
+                        <div style={{ height: 400, width: '100%' }}>
+                            <DataGrid
+                                rows={category.category}
+                                columns={columns}
+                                initialState={{
+                                    pagination: {
+                                        paginationModel: { page: 0, pageSize: 5 },
+                                    },
+                                }}
+                                pageSizeOptions={[5, 10]}
+                            />
+                        </div>
+                    </>
+            }
         </div>
     );
 }

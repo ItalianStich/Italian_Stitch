@@ -3,18 +3,18 @@ import { db } from "../../../firebase";
 import { addDoc, collection, deleteDoc, doc, getDocs, updateDoc } from "firebase/firestore";
 
 const initialState = {
-    isLoading: false,
+    loading: false,
     subcategory: [],
     error: null
 }
 
 const onLoading = (state, action) => {
-    state.isLoading = true;
+    state.loading = true;
     state.error = null;
 }
 
 const onError = (state, action) => {
-    state.isLoading = false;
+    state.loading = false;
     state.error = action.error.message;
 }
 
@@ -82,7 +82,7 @@ export const subcategorySlice = createSlice({
 
         builder.addCase(getSubcategory.fulfilled, (state, action) => {
             state.subcategory = action.payload;
-            state.isLoading = false;
+            state.loading = false;
             state.error = null;
         })
 

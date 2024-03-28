@@ -8,6 +8,8 @@ import IconButton from '@mui/material/IconButton';
 import { useState, useEffect } from 'react';
 import { setAlert } from '../../../user/redux/slice/Alert.slice';
 import { addSubcategory, deleteSubcategory, getSubcategory, updateSubcategory } from '../../../user/redux/slice/Subcategory.slice';
+import ErrorMsg from '../../../user/UI/errorMsg/ErrorMsg';
+import Loader from '../../../user/UI/loader/Loader';
 
 function Subcategory() {
     const [update, setUpdate] = useState(false)
@@ -68,21 +70,28 @@ function Subcategory() {
     ];
 
     return (
-        <div>
-            <h2>Sub Category</h2>
-            <SubCategoryForm onHandleSubmit={handleSubmitForm} updateData={update} />
-            <div style={{ height: 400, width: '100%' }}>
-                <DataGrid
-                    rows={subcategory.subcategory}
-                    columns={columns}
-                    initialState={{
-                        pagination: {
-                            paginationModel: { page: 0, pageSize: 5 },
-                        },
-                    }}
-                    pageSizeOptions={[5, 10]}
-                />
-            </div>
+        <div className='data_table' style={{ height: 400, width: '100%' }}>
+            {subcategory.loading ?
+                <Loader style={{ height: 'calc(100vh - 64px' }} /> :
+                subcategory.error ?
+                    <ErrorMsg style={{ height: "calc(100vh - 64px" }} text={subcategory.error} /> :
+                    <>
+                        <SubCategoryForm onHandleSubmit={handleSubmitForm} updateData={update} />
+                        <div style={{ height: 400, width: '100%' }}>
+                            <DataGrid
+                                rows={subcategory.subcategory}
+                                columns={columns}
+                                initialState={{
+                                    pagination: {
+                                        paginationModel: { page: 0, pageSize: 5 },
+                                    },
+                                }}
+                                pageSizeOptions={[5, 10]}
+                            />
+
+                        </div>
+                    </>
+            }
         </div>
     );
 }

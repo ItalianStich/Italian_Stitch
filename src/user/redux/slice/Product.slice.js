@@ -5,18 +5,18 @@ import { deleteObject, getDownloadURL, ref, uploadBytes } from "firebase/storage
 import { db, storage } from '../../../firebase'
 
 const initialState = {
-    isLoading: false,
+    loading: false,
     product: [],
     error: null
 }
 
 const onLoading = (state, action) => {
-    state.isLoading = true;
+    state.loading = true;
     state.error = null;
 }
 
 const onError = (state, action) => {
-    state.isLoading = false;
+    state.loading = false;
     state.error = action.error.message;
 }
 
@@ -135,7 +135,7 @@ export const productSlice = createSlice({
 
         builder.addCase(getProduct.fulfilled, (state, action) => {
             state.product = action.payload;
-            state.isLoading = false;
+            state.loading = false;
             state.error = null;
         });
 

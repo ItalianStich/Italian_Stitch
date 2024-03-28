@@ -58,7 +58,7 @@ function SubCategoryForm({ onHandleSubmit, updateData }) {
 
     return (
         <>
-            <div className='d-flex align-items-center justify-content-between py-4'>
+            <div className='d-flex align-items-center justify-content-between py-5'>
                 <h3 className='mb-0' style={{ color: '#FF6337' }}>Subcategory</h3>
                 <Button type="button" variant="contained" onClick={handleClickOpen}>Subcategory <AddIcon fontSize="small" /></Button>
             </div>
