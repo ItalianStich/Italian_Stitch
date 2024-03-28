@@ -111,76 +111,44 @@ function OrderDetails(props) {
                                         <div className="product-price1">₹ {item.mrp}</div>
                                     </div>
                                 </div>
-
-                                {/* {
-                                    index === 0 ? <select
-                                        value={selectedStatus}
-                                        onChange={(e) => { setSelectedStatus(e.target.value) }}
-                                    >
-                                        <option value="processing">Processing</option>
-                                        <option value="shipped">Shipped</option>
-                                        <option value="cancelled">Cancelled</option>
-                                    </select> : ''
-                                } */}
-                                <label style={{ paddingTop: '7px', paddingRight: '37px' }}>Category name:</label>
-                                {
-                                    index === 0 ?
-                                        <select
-                                            name="category_id"
-                                            id="category_id"
-                                            className="form-select"
-                                            onChange={(e) => { setSelectedStatus(e.target.value) }}
-                                            value={selectedStatus}
-                                        >
-                                            <option value='processing'>Processing</option>
-                                            <option value='shipped'>Shipped</option>
-                                            <option value='cancelled'>Cancelled</option>
-                                            
-                                        </select> : ''
-                                }
-
                             </div>
-
                         )
                     })
                 }
-            </div >
+            </div>
 
-            <br></br>
+            <br />
 
-            <hr></hr>
+            <hr />
+
             <div className='d-flex align-items-center justify-content-center'>
                 <h3 className='mb-0' style={{ color: 'gray' }}>User Information</h3>
             </div>
 
-            <div className="product-card" style={{ width: '600px', marginLeft: '250px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.5)' }}>
+            <div className="product-card" style={{ width: '600px', marginLeft: '250px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.5)', padding: '20px' }}>
                 {
-                    productData.map((value) => {
-                        const dataObj = value.address;
-                        if (dataObj && Array.isArray(dataObj)) { // Check if newww is an array
-                            return dataObj.map((addressItem, addressIndex) => {
-                                return (
-                                    <div className="product-details">
-                                        <span className="product-catagory" style={{ color: 'gray' }}>User Name: {addressItem.c_fname} {addressItem.c_lname}</span>
-                                        <p>Shipping Address: {addressItem.c_address} {addressItem.appartment} {addressItem.c_state_country} - {addressItem.c_postal_zip}</p>
-                                        <p>Mobile Number: {addressItem.c_phone}</p>
-                                    </div>
-                                )
-                            })
-
-                        }
+                    filteredData.map((value, index) => {
+                        return value.address.map((addressItem, index) => (
+                            <div key={index} className="product-details">
+                                <span className="product-catagory" style={{ color: 'gray' }}>User Name: {addressItem.c_fname} {addressItem.c_lname}</span>
+                                <p>Shipping Address: {addressItem.c_address} {addressItem.appartment} {addressItem.c_state_country} - {addressItem.c_postal_zip}</p>
+                                <p>Mobile Number: {addressItem.c_phone}</p>
+                            </div>
+                        ));
                     })
                 }
-                <div role='none'>
-                    <button id='prev' className='_1Pr1m wQxKC _2fXFm _2zWIL' style={{ backgroundColor: 'lightgrey', color: 'black' }} type='submit' aria-label='Submit' tabIndex={0}
-                        onClick={handleStatusChanged}
-                    >
-                        <span>
-                            <strong>Submit</strong>
-                        </span>
-                    </button>
+                <div className="product-details1" style={{ paddingLeft: '30px' }}>
+                    <label htmlFor="shippingStatus">Shipping Status:</label>
+                    <select id="shippingStatus" style={{ marginLeft: '10px', padding: '8px 16px', fontSize: '16px', border: '1px solid #ccc', borderRadius: '4px', backgroundColor: '#fff', color: '#333', cursor: 'pointer', outline: 'none', width: '200px' }} value={selectedStatus} onChange={(e) => { setSelectedStatus(e.target.value) }}>
+                        <option value="shipping">Shipping</option>
+                        <option value="pending">Pending</option>
+                        <option value="cancelled">Cancelled</option>
+                    </select>
                 </div>
-            </div >
+                <div className="product-details">
+                    <button className="submit-btn" onClick={handleStatusChanged} style={{ padding: '10px 20px', backgroundColor: 'lightgrey', border: 'none', cursor: 'pointer' }}>Submit</button>
+                </div>
+            </div>
         </>
     )
 }

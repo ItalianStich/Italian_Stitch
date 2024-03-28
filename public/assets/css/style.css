@@ -1633,3 +1633,37 @@ span.line-through {
     margin-bottom: 8px;
     margin-left: -350px;
 }
+
+.submit-btn {
+    background-color: lightgrey;
+    color: black;
+    /* padding: 10px 20px; */
+    border: none;
+    cursor: pointer;
+}
+
+/* CSS for dropdown */
+#shippingStatus {
+    padding: 8px 16px; /* Adjust padding as needed */
+    font-size: 16px; /* Adjust font size as needed */
+    border: 1px solid #ccc; /* Add border */
+    border-radius: 4px; /* Add border radius */
+    background-color: #fff; /* Set background color */
+    color: #333; /* Set text color */
+    cursor: pointer; /* Set cursor */
+    outline: none; /* Remove outline */
+    width: 200px; /* Set width */
+}
+
+/* CSS for dropdown options */
+#shippingStatus option {
+    padding: 8px 16px; /* Adjust padding as needed */
+    font-size: 16px; /* Adjust font size as needed */
+    cursor: pointer; /* Set cursor */
+}
+
+/* CSS for dropdown when focused */
+#shippingStatus:focus {
+    border-color: #66afe9; /* Change border color when focused */
+    box-shadow: 0 0 5px rgba(102, 175, 233, 0.6); /* Add box shadow when focused */
+}
